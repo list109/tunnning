@@ -20,10 +20,9 @@ export class App extends React.Component {
           Ja<span className="highlight">mmm</span>ing
         </h1>
         <div className="App">
-          <SearchBar></SearchBar>
+          <SearchBar />
           <div className="App-playlist">
-            <SearchResults results={searchResults}></SearchResults>
-            <Playlist name={playlistName} tracks={playlistTracks}></Playlist>
+            <Playlist name={playlistName} tracks={playlistTracks} />
           </div>
         </div>
       </div>
