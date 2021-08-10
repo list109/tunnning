@@ -1,9 +1,9 @@
 import React from 'react'
 import './Track.css'
 
-export function Track({ track, isRemoval, onClick }) {
+export function Track({ track, isRemoval, onAdd, onRemove }) {
   const { name, artist, album } = track
-  const handleClick = () => onClick(track)
+  const handleClick = () => (isRemoval ? onRemove(track) : onAdd(track))
 
   return (
     <div className="Track">
