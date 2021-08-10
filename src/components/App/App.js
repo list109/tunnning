@@ -6,11 +6,13 @@ import './App.css'
 
 export class App extends React.Component {
   state = {
-    searchResults: []
+    searchResults: [],
+    playlistName: '',
+    playlistTracks: []
   }
 
   render() {
-    const { searchResults } = this.state
+    const { searchResults, playlistName, playlistTracks } = this.state
 
     return (
       <div>
@@ -21,7 +23,7 @@ export class App extends React.Component {
           <SearchBar></SearchBar>
           <div className="App-playlist">
             <SearchResults results={searchResults}></SearchResults>
-            <Playlist></Playlist>
+            <Playlist name={playlistName} tracks={playlistTracks}></Playlist>
           </div>
         </div>
       </div>
