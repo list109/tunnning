@@ -5,7 +5,13 @@ import { Playlist } from '../Playlist/Playlist'
 import './App.css'
 
 export class App extends React.Component {
+  state = {
+    searchResults: []
+  }
+
   render() {
+    const { searchResults } = this.state
+
     return (
       <div>
         <h1>
@@ -14,7 +20,7 @@ export class App extends React.Component {
         <div className="App">
           <SearchBar></SearchBar>
           <div className="App-playlist">
-            <SearchResults></SearchResults>
+            <SearchResults results={searchResults}></SearchResults>
             <Playlist></Playlist>
           </div>
         </div>

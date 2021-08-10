@@ -2,12 +2,12 @@ import React from 'react'
 import { Track } from '../Track/Track'
 import './TrackList.css'
 
-export function TrackList() {
+export function TrackList({ tracks }) {
   return (
     <div className="TrackList">
-      <Track name="name" artist="artist" album="album" />
-      <Track name="name" artist="artist" album="album" />
-      <Track name="name" artist="artist" album="album" />
+      {tracks.map(track => (
+        <Track {...track} />
+      ))}
     </div>
   )
 }
