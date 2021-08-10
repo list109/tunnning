@@ -1,7 +1,10 @@
 import React from 'react'
 import './Track.css'
 
-export function Track({ name, artist, album, isRemoval }) {
+export function Track({ track, isRemoval, onClick }) {
+  const { name, artist, album } = track
+  const handleClick = () => onClick(track)
+
   return (
     <div className="Track">
       <div className="Track-information">
@@ -10,7 +13,9 @@ export function Track({ name, artist, album, isRemoval }) {
           {artist} | {album}
         </p>
       </div>
-      <button className="Track-action">{isRemoval ? '-' : '+'}</button>
+      <button className="Track-action" onClick={handleClick}>
+        {isRemoval ? '-' : '+'}
+      </button>
     </div>
   )
 }

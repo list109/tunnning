@@ -11,6 +11,17 @@ export class App extends React.Component {
     playlistTracks: []
   }
 
+  addTrack = track => {
+    const { playlistTracks } = this.state
+    const isPresent = playlistTracks.find(({ id }) => id === track.id)
+
+    if (isPresent) return
+
+    this.setState({
+      playlistTracks: [...playlistTracks, track]
+    })
+  }
+
   render() {
     const { searchResults, playlistName, playlistTracks } = this.state
 
@@ -22,6 +33,7 @@ export class App extends React.Component {
         <div className="App">
           <SearchBar />
           <div className="App-playlist">
+            <SearchResults results={searchResults} onAdd={this.addTrack} />
             <Playlist name={playlistName} tracks={playlistTracks} />
           </div>
         </div>
