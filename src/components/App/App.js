@@ -28,6 +28,8 @@ export class App extends React.Component {
     })
   }
 
+  updatePlaylistName = value => this.setState({ playlistName: value })
+
   render() {
     const { searchResults, playlistName, playlistTracks } = this.state
 
@@ -40,7 +42,12 @@ export class App extends React.Component {
           <SearchBar />
           <div className="App-playlist">
             <SearchResults results={searchResults} onAdd={this.addTrack} />
-            <Playlist name={playlistName} tracks={playlistTracks} onRemove={this.onRemove} />
+            <Playlist
+              name={playlistName}
+              tracks={playlistTracks}
+              onRemove={this.onRemove}
+              onNameChange={this.updatePlaylistName}
+            />
           </div>
         </div>
       </div>
