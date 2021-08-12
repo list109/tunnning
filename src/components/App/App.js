@@ -30,6 +30,10 @@ export class App extends React.Component {
 
   updatePlaylistName = value => this.setState({ playlistName: value })
 
+  savePlaylist = () => {
+    const trackURIs = this.state.playlistTracks.map(({ uri }) => uri)
+  }
+
   render() {
     const { searchResults, playlistName, playlistTracks } = this.state
 
@@ -47,6 +51,7 @@ export class App extends React.Component {
               tracks={playlistTracks}
               onRemove={this.removeTrack}
               onNameChange={this.updatePlaylistName}
+              onSave={this.savePlaylist}
             />
           </div>
         </div>
