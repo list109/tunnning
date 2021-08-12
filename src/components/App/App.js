@@ -11,6 +11,10 @@ export class App extends React.Component {
     playlistTracks: []
   }
 
+  search = term => {
+    console.log(term)
+  }
+
   addTrack = track => {
     const { playlistTracks } = this.state
     const isPresent = playlistTracks.find(({ id }) => id === track.id)
@@ -43,7 +47,7 @@ export class App extends React.Component {
           Ja<span className="highlight">mmm</span>ing
         </h1>
         <div className="App">
-          <SearchBar />
+          <SearchBar onSearch={this.search} />
           <div className="App-playlist">
             <SearchResults results={searchResults} onAdd={this.addTrack} />
             <Playlist
