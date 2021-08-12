@@ -6,13 +6,18 @@ import './App.css'
 
 export class App extends React.Component {
   state = {
+    searchTerm: '',
     searchResults: [],
     playlistName: '',
     playlistTracks: []
   }
 
-  search = term => {
-    console.log(term)
+  handleTermChange = value => {
+    this.setState({ searchTerm: value })
+  }
+
+  search = () => {
+    console.log(this.state.searchTerm)
   }
 
   addTrack = track => {
@@ -39,7 +44,7 @@ export class App extends React.Component {
   }
 
   render() {
-    const { searchResults, playlistName, playlistTracks } = this.state
+    const { searchResults, playlistName, playlistTracks, searchTerm } = this.state
 
     return (
       <div>
@@ -47,7 +52,11 @@ export class App extends React.Component {
           Ja<span className="highlight">mmm</span>ing
         </h1>
         <div className="App">
-          <SearchBar onSearch={this.search} />
+          <SearchBar
+            searchTerm={searchTerm}
+            onSearch={this.search}
+            onChange={this.handleTermChange}
+          />
           <div className="App-playlist">
             <SearchResults results={searchResults} onAdd={this.addTrack} />
             <Playlist
