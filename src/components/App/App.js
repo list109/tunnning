@@ -45,7 +45,7 @@ export class App extends React.Component {
             <Playlist
               name={playlistName}
               tracks={playlistTracks}
-              onRemove={this.onRemove}
+              onRemove={this.removeTrack}
               onNameChange={this.updatePlaylistName}
             />
           </div>
