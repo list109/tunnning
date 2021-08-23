@@ -8,7 +8,7 @@ export class App extends React.Component {
   state = {
     searchTerm: '',
     searchResults: [],
-    playlistName: '',
+    playlistName: 'New Playlist',
     playlistTracks: []
   }
 
