@@ -13,7 +13,7 @@ export function Track({ track, isRemoval, onAdd, onRemove }) {
           {artist} | {album}
         </p>
       </div>
-      <button className="Track-action" onClick={handleClick}>
+      <button type="button" className="Track-action" onClick={handleClick}>
         {isRemoval ? '-' : '+'}
       </button>
     </div>
