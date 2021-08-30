@@ -15,7 +15,3 @@ export function Playlist({ name, tracks, onRemove, onNameChange, onSave }) {
     </div>
   )
 }
-
-Playlist.defaultValue = {
-  name: 'New Playlist'
-}
