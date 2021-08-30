@@ -2,7 +2,7 @@ import React from 'react'
 import './Track.css'
 
 export function Track({ track, isRemoval, onAdd, onRemove }) {
-  const { name, artist, album } = track
+  const { name, artists, album, uri } = track
   const handleClick = () => (isRemoval ? onRemove(track) : onAdd(track))
 
   return (
@@ -10,7 +10,7 @@ export function Track({ track, isRemoval, onAdd, onRemove }) {
       <div className="Track-information">
         <h3>{name}</h3>
         <p>
-          {artist} | {album}
+          {artists[0]?.name} | {album?.name}
         </p>
       </div>
       <button type="button" className="Track-action" onClick={handleClick}>
