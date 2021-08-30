@@ -7,7 +7,7 @@ export function TrackList({ tracks, isRemoval, onAdd, onRemove }) {
     <div className="TrackList">
       {tracks.map(track => (
         <Track
-          id={track.id}
+          key={track.id}
           track={track}
           isRemoval={isRemoval}
           onAdd={onAdd}
