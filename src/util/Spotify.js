@@ -92,16 +92,18 @@ export const Spotify = {
 
     if (!response.ok) {
       let message = `${response.status}:${response.statusText} the response status is not ok`
+      let jsonResponse = {}
 
       try {
-        const jsonResponse = await response.json()
-
-        message = jsonResponse.error.message
+        jsonResponse = await response.json()
       } catch (err) {
         throw new SpotifyError({ message })
       }
-
-      throw new SpotifyError({ message })
+      throw new SpotifyError({
+        message: jsonResponse.error.message || message,
+        status: jsonResponse.error.status || '',
+        object: jsonResponse
+      })
     }
 
     try {
