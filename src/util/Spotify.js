@@ -170,6 +170,10 @@ export const Spotify = {
     }
 
     return randomString
+  },
+
+  getRequestHeaders() {
+    return { Authorization: `Bearer ${this.token}` }
   }
 }
 
