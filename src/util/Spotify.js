@@ -7,7 +7,9 @@ export const Spotify = {
     authorize: `https://accounts.spotify.com/authorize`,
     token: 'https://accounts.spotify.com/api/token',
     search: 'https://api.spotify.com/v1/search',
-    user: 'https://api.spotify.com/v1/me'
+    me: 'https://api.spotify.com/v1/me',
+    users: 'https://api.spotify.com/v1/users',
+    playlists: 'https://api.spotify.com/v1/playlists'
   },
   token: '',
   state: '',
