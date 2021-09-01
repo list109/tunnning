@@ -34,6 +34,52 @@ export const Spotify = {
     return tracks.items
   },
 
+  async savePlaylist({ name, trackURIs }) {
+    const token = this.getAccessToken()
+    const isParamsVerified = token && name && Array.isArray(trackURIs) && trackURIs.length
+
+    if (isParamsVerified === false) return
+
+    const userId = await this.getUserId()
+    const playlistResponse = await this.createPlaylist(name, userId)
+    const { id: playlistId } = playlistResponse
+
+    const tracksResponse = await this.saveTracks({ playlistId, trackURIs })
+    return tracksResponse
+  },
+
+  async getUserId() {
+    const options = {
+      headers: this.getRequestHeaders()
+    }
+
+    const { id } = await this.fetchJson(this.url.me, options)
+
+    return id
+  },
+
+  async createPlaylist(name, userId) {
+    const url = `${this.url.users}/${userId}/playlists`
+    const options = {
+      method: 'POST',
+      headers: this.getRequestHeaders(),
+      body: JSON.stringify({
+        name
+      })
+    }
+
+    return this.fetchJson(url, options)
+  },
+
+  async saveTracks({ playlistId, trackURIs }) {
+    const url = `${this.url.playlists}/${playlistId}/tracks?uris=${trackURIs.join(',')}`
+    const options = {
+      method: 'POST',
+      headers: this.getRequestHeaders()
+    }
+    return this.fetchJson(url, options)
+  },
+
   async fetchJson(url, options) {
     let response
 
