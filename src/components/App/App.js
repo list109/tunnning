@@ -48,9 +48,20 @@ export class App extends React.Component {
 
   updatePlaylistName = value => this.setState({ playlistName: value })
 
-  // savePlaylist = () => {
-  //   const trackURIs = this.state.playlistTracks.map(({ uri }) => uri)
-  // }
+  savePlaylist = () => {
+    const trackURIs = this.state.playlistTracks.map(({ uri }) => uri)
+    const { playlistName: name } = this.state
+
+    Spotify.savePlaylist({ name, trackURIs })
+      .then(response => {
+        console.log('the playlist has been saved')
+        this.setState({
+          playlistName: this.playlistName,
+          playlistTracks: []
+        })
+      })
+      .catch(err => console.log('some error has occured'))
+  }
 
   render() {
     const { searchResults, playlistName, playlistTracks, searchTerm } = this.state
