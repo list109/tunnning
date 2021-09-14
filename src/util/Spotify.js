@@ -24,9 +24,7 @@ export const Spotify = {
     url.searchParams.set('type', 'track')
 
     const options = {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
+      headers: this.getRequestHeaders()
     }
 
     localStorage.removeItem('state')
