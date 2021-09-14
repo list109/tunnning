@@ -6,10 +6,12 @@ import { Spotify } from '../../util/Spotify'
 import './App.css'
 
 export class App extends React.Component {
+  playlistName = 'New Playlist'
+
   state = {
     searchTerm: '',
     searchResults: [],
-    playlistName: 'New Playlist',
+    playlistName: this.playlistName,
     playlistTracks: []
   }
 
