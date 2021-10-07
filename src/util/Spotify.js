@@ -26,8 +26,6 @@ export const Spotify = {
       headers: this.getRequestHeaders()
     }
 
-    localStorage.removeItem('state')
-
     const { tracks } = await this.fetchJson(url, options)
 
     return tracks.items
@@ -118,10 +116,17 @@ export const Spotify = {
     if (this.token) return this.token
 
     const { access_token: token, expires_in: expTime, state } = this.getHashParams()
+    const localState = localStorage.getItem('state')
 
-    if (token && expTime && state) {
+    if (state && state !== localState) {
+      console.log('state mismatch error')
+      return
+    }
+
+    if (token && expTime) {
+      localStorage.removeItem('state')
+
       this.token = token
-      this.state = state
       setTimeout(() => (this.token = null), expTime * 1000 - 1000)
 
       window.history.replaceState({}, '', window.location.origin)
