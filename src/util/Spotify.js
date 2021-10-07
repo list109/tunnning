@@ -3,14 +3,16 @@ const REDIRECT_URI = 'http://localhost:3000'
 const SCOPE = 'playlist-modify-public'
 
 export const Spotify = {
-  url: {
+  urls: {
     authorize: `https://accounts.spotify.com/authorize`,
-    token: 'https://accounts.spotify.com/api/token',
-    search: 'https://api.spotify.com/v1/search',
-    me: 'https://api.spotify.com/v1/me',
-    users: 'https://api.spotify.com/v1/users',
-    playlists: 'https://api.spotify.com/v1/playlists'
+    api: 'https://api.spotify.com/v1'
   },
+
+  getUrl: endpoint => {
+    const { authorize, api } = this.urls
+    return endpoint === 'authorize' ? authorize : `${api}/${endpoint}`
+  },
+
   token: '',
   stateLength: 16,
 
@@ -18,7 +20,7 @@ export const Spotify = {
     const token = this.getAccessToken()
     if (!token) return []
 
-    const url = new URL(this.url.search)
+    const url = new URL(this.getUrl('search'))
     url.searchParams.set('q', term)
     url.searchParams.set('type', 'track')
 
@@ -50,13 +52,13 @@ export const Spotify = {
       headers: this.getRequestHeaders()
     }
 
-    const { id } = await this.fetchJson(this.url.me, options)
+    const { id } = await this.fetchJson(this.getUrl('me'), options)
 
     return id
   },
 
   async createPlaylist(name, userId) {
-    const url = `${this.url.users}/${userId}/playlists`
+    const url = `${this.getUrl('users')}/${userId}/playlists`
     const options = {
       method: 'POST',
       headers: this.getRequestHeaders(),
@@ -69,7 +71,7 @@ export const Spotify = {
   },
 
   async saveTracks({ playlistId, trackURIs }) {
-    const url = `${this.url.playlists}/${playlistId}/tracks?uris=${trackURIs.join(',')}`
+    const url = `${this.getUrl('playlists')}/${playlistId}/tracks?uris=${trackURIs.join(',')}`
     const options = {
       method: 'POST',
       headers: this.getRequestHeaders()
@@ -153,7 +155,7 @@ export const Spotify = {
     const state = this.generateRandomState(this.stateLenght)
     localStorage.setItem('state', state)
 
-    let url = this.url.authorize + '?'
+    let url = this.getUrl('authorize') + '?'
 
     url += `client_id=${CLIENT_ID}&`
     url += 'response_type=token&'
