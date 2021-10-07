@@ -12,8 +12,7 @@ export const Spotify = {
     playlists: 'https://api.spotify.com/v1/playlists'
   },
   token: '',
-  state: '',
-  stateLenght: 16,
+  stateLength: 16,
 
   async searchTrack(term) {
     const token = this.getAccessToken()
