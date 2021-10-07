@@ -2,7 +2,7 @@ import React from 'react'
 import './Track.css'
 
 export function Track({ track, isRemoval, onAdd, onRemove }) {
-  const { name, artists, album, uri } = track
+  const { name, artists, album } = track
   const handleClick = () => (isRemoval ? onRemove(track) : onAdd(track))
 
   return (
