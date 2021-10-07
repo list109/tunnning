@@ -154,7 +154,7 @@ export const Spotify = {
     url += 'response_type=token&'
     url += `redirect_uri=${encodeURIComponent(REDIRECT_URI)}&`
     url += `state=${state}&`
-    url += `scope=${encodeURIComponent(SCOPE)}&`
+    url += `scope=${SCOPE}&`
 
     window.location = url
   },
