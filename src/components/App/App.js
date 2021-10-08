@@ -19,6 +19,10 @@ export class App extends React.Component {
     this.setState({ searchTerm: value })
   }
 
+  getEnterDownHandler = callback => {
+    return keyValue => keyValue === 'Enter' && callback()
+  }
+
   search = () => {
     Spotify.searchTrack(this.state.searchTerm)
       .then(tracks => {
@@ -60,7 +64,7 @@ export class App extends React.Component {
 
     Spotify.savePlaylist({ name, trackURIs })
       .then(response => {
-        console.log('the playlist has been saved')
+        console.log('the playlist has been saved successfully')
         this.setState({
           playlistName: this.playlistName,
           playlistTracks: []
@@ -82,6 +86,7 @@ export class App extends React.Component {
             searchTerm={searchTerm}
             onSearch={this.search}
             onChange={this.handleTermChange}
+            onKeyDown={this.getEnterDownHandler(this.search)}
           />
           <div className="App-playlist">
             <SearchResults results={searchResults} onAdd={this.addTrack} />
@@ -91,6 +96,7 @@ export class App extends React.Component {
               onRemove={this.removeTrack}
               onNameChange={this.updatePlaylistName}
               onSave={this.savePlaylist}
+              onKeyDown={this.getEnterDownHandler(this.savePlaylist)}
             />
           </div>
         </div>
