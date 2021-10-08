@@ -35,9 +35,7 @@ export const Spotify = {
 
   async savePlaylist({ name, trackURIs }) {
     const token = this.getAccessToken()
-    const isParamsVerified = token && name && Array.isArray(trackURIs) && trackURIs.length
-
-    if (isParamsVerified === false) return
+    if (!token) return
 
     const userId = await this.getUserId()
     const playlistResponse = await this.createPlaylist(name, userId)
@@ -97,13 +95,11 @@ export const Spotify = {
     if (!response.ok) {
       let message = `${statusText && statusText + '. '}The response status is not ok`
       let jsonResponse = {}
-
       try {
         jsonResponse = await response.json()
       } catch (err) {
         throw new SpotifyError({ status, message, object: response })
       }
-      debugger
       throw new SpotifyError({
         message: (jsonResponse.error && jsonResponse.error.message) || message,
         status: (jsonResponse.error && jsonResponse.error.status) || status,

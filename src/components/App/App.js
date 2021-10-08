@@ -52,6 +52,12 @@ export class App extends React.Component {
     const trackURIs = this.state.playlistTracks.map(({ uri }) => uri)
     const { playlistName: name } = this.state
 
+    const isVerified = name && trackURIs.length > 0
+    if (isVerified === false) {
+      console.log("need a playlist's name or one or more tracks")
+      return
+    }
+
     Spotify.savePlaylist({ name, trackURIs })
       .then(response => {
         console.log('the playlist has been saved')
@@ -60,7 +66,7 @@ export class App extends React.Component {
           playlistTracks: []
         })
       })
-      .catch(err => console.log('some error has occured'))
+      .catch(({ message }) => console.log(message))
   }
 
   render() {
