@@ -8,7 +8,7 @@ export const Spotify = {
     api: 'https://api.spotify.com/v1'
   },
 
-  getUrl: endpoint => {
+  getUrl(endpoint) {
     const { authorize, api } = this.urls
     return endpoint === 'authorize' ? authorize : `${api}/${endpoint}`
   },
@@ -85,22 +85,28 @@ export const Spotify = {
     try {
       response = await fetch(url, options)
     } catch (err) {
-      console.log('Network error')
-      throw new SpotifyError({ message: err.message })
+      throw new SpotifyError({
+        status: 'Network error',
+        message: err.message,
+        object: err
+      })
     }
 
+    const { status, statusText } = response
+
     if (!response.ok) {
-      let message = `${response.status}:${response.statusText} the response status is not ok`
+      let message = `${statusText && statusText + '. '}The response status is not ok`
       let jsonResponse = {}
 
       try {
         jsonResponse = await response.json()
       } catch (err) {
-        throw new SpotifyError({ message })
+        throw new SpotifyError({ status, message, object: response })
       }
+      debugger
       throw new SpotifyError({
-        message: jsonResponse.error.message || message,
-        status: jsonResponse.error.status || '',
+        message: (jsonResponse.error && jsonResponse.error.message) || message,
+        status: (jsonResponse.error && jsonResponse.error.status) || status,
         object: jsonResponse
       })
     }
@@ -110,7 +116,10 @@ export const Spotify = {
       return jsonResponse
     } catch (err) {
       console.log(err.message)
-      throw new SpotifyError({ message: 'Could not convert the response data' })
+      throw new SpotifyError({
+        status: 'Incorrects response from the server',
+        message: 'Could not convert the response data'
+      })
     }
   },
 
@@ -184,7 +193,7 @@ export const Spotify = {
 }
 
 class SpotifyError extends Error {
-  constructor({ message, status, object }) {
+  constructor({ status, message, object }) {
     super(message)
     this.status = status
     this.object = object
