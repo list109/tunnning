@@ -3,7 +3,7 @@ import { TrackList } from '../TrackList/TrackList'
 import './Playlist.css'
 
 export function Playlist({ name, tracks, onRemove, onNameChange, onSave }) {
-  const handleNameChange = ({ value }) => onNameChange(value)
+  const handleNameChange = ({ target }) => onNameChange(target.value)
 
   return (
     <div className="Playlist">
