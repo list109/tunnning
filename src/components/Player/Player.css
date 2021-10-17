@@ -40,6 +40,10 @@
   line-height: 1.2;
 }
 
+.player-time-passed {
+  color: rgb(197, 197, 197);
+}
+
 .player button {
   cursor: pointer;
   width: 52px;
@@ -75,6 +79,7 @@
   top: 0;
   height: 100%;
   background: #7b96a3;
+  transition: width 0.5s;
 }
 
 /* media */
