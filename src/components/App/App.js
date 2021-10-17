@@ -2,6 +2,7 @@ import React from 'react'
 import { SearchBar } from '../SearchBar/SearchBar'
 import { SearchResults } from '../SearchResults/SearchResults'
 import { Playlist } from '../Playlist/Playlist'
+import { Player } from '../Player/Player'
 import { Spotify } from '../../util/Spotify'
 import './App.css'
 
@@ -12,7 +13,12 @@ export class App extends React.Component {
     searchTerm: '',
     searchResults: [],
     playlistName: this.playlistName,
-    playlistTracks: []
+    playlistTracks: [],
+
+    // player
+    sample: 's',
+    muted: false,
+    paused: false
   }
 
   handleTermChange = value => {
@@ -73,8 +79,25 @@ export class App extends React.Component {
       .catch(({ message }) => console.log(message))
   }
 
+  handleReplayClick() {}
+
+  handlePauseClick = () => {
+    this.setState({ paused: !this.state.paused })
+  }
+
+  handleForwardClick = () => {}
+
+  handlePlaybackClick = () => {}
+
+  handleMuteClick = () => {
+    this.setState({ muted: !this.state.muted })
+  }
+
+  handleVolumeClick = () => {}
+
   render() {
-    const { searchResults, playlistName, playlistTracks, searchTerm } = this.state
+    const { searchResults, playlistName, playlistTracks, searchTerm, sample, paused, muted } =
+      this.state
 
     return (
       <div>
@@ -97,6 +120,17 @@ export class App extends React.Component {
               onNameChange={this.updatePlaylistName}
               onSave={this.savePlaylist}
               onKeyDown={this.getEnterDownHandler(this.savePlaylist)}
+            />
+            <Player
+              sample={sample}
+              paused={paused}
+              muted={muted}
+              onReplayClick={this.handleReplayClick}
+              onPauseClick={this.handlePauseClick}
+              onForwardClick={this.handleForwardClick}
+              onPlaybackClick={this.handlePlaybackClick}
+              onMuteClick={this.handleMuteClick}
+              onVolumeClick={this.handleVolumeClick}
             />
           </div>
         </div>
