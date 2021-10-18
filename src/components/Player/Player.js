@@ -1,6 +1,6 @@
 import React from 'react'
 import './Player.css'
-import * as icons from './icons/icons'
+import { Icons } from '../Icons/Icons'
 
 export class Player extends React.Component {
   getStateHandler = callback => {
@@ -40,13 +40,13 @@ export class Player extends React.Component {
       <div className="player">
         <div className="container">
           <button className="player-replay" type="button" onClick={onReplayClick}>
-            {icons.replay}
+            {Icons.get('replay', 24)}
           </button>
           <button className="player-button" type="button" onClick={onPauseClick}>
-            {paused ? icons.play : icons.pause}
+            {paused ? Icons.get('play') : Icons.get('pause')}
           </button>
           <button className="player-forward" type="button" onClick={onForwardClick}>
-            {icons.forward}
+            {Icons.get('forward', 24)}
           </button>
           <div className="player-playback-total" onClick={this.getStateHandler(onPlaybackClick)}>
             <span className="player-playback-passed" style={{ width: '25%' }}></span>
@@ -56,7 +56,7 @@ export class Player extends React.Component {
             <time className="player-time-duration">00:31</time>
           </p>
           <button className="player-mute" type="button" onClick={onMuteClick}>
-            {muted ? icons.mute : icons.volume}
+            {muted ? Icons.get('volume') : Icons.get('mute')}
           </button>
           <div className="player-volume-total" onClick={this.getStateHandler(onVolumeClick)}>
             <span className="player-volume-level" style={{ width: '25%' }}></span>
