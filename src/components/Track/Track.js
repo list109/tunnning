@@ -1,4 +1,5 @@
 import React from 'react'
+import { Icons } from '../Icons/Icons'
 import './Track.css'
 
 export function Track({ track, isRemoval, onAdd, onRemove }) {
@@ -13,6 +14,9 @@ export function Track({ track, isRemoval, onAdd, onRemove }) {
           {artists[0]?.name} | {album?.name}
         </p>
       </div>
+      <button type="button" className="Track-play">
+        {Icons.get('play')}
+      </button>
       <button type="button" className="Track-action" onClick={handleClick}>
         {isRemoval ? '-' : '+'}
       </button>
