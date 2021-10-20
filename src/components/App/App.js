@@ -15,9 +15,7 @@ export class App extends React.Component {
     playlistName: this.playlistName,
     playlistTracks: [],
 
-    // player
-    sample: 's',
-    muted: false,
+    playingTrack: '',
     paused: false
   }
 
@@ -121,17 +119,7 @@ export class App extends React.Component {
               onSave={this.savePlaylist}
               onKeyDown={this.getEnterDownHandler(this.savePlaylist)}
             />
-            <Player
-              sample={sample}
-              paused={paused}
-              muted={muted}
-              onReplayClick={this.handleReplayClick}
-              onPauseClick={this.handlePauseClick}
-              onForwardClick={this.handleForwardClick}
-              onPlaybackClick={this.handlePlaybackClick}
-              onMuteClick={this.handleMuteClick}
-              onVolumeClick={this.handleVolumeClick}
-            />
+            {playingTrack && (
           </div>
         </div>
       </div>
