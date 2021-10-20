@@ -2,10 +2,9 @@ import React from 'react'
 import { Icons } from '../Icons/Icons'
 import './Track.css'
 
-export function Track({ track, isRemoval, onAdd, onRemove }) {
-  const { name, artists, album } = track
-  const handleClick = () => (isRemoval ? onRemove(track) : onAdd(track))
-
+export function Track({ track, isRemoval, onAdd, onRemove, onPlayButton, playingTrackID = null }) {
+  const handleMoveTrack = () => (isRemoval ? onRemove(track) : onAdd(track))
+  const handlePlayButton = () => onPlayButton(track, isRepeated)
   return (
     <div className="Track">
       <div className="Track-information">
@@ -14,10 +13,10 @@ export function Track({ track, isRemoval, onAdd, onRemove }) {
           {artists[0]?.name} | {album?.name}
         </p>
       </div>
-      <button type="button" className="Track-play">
-        {Icons.get('play')}
+      <button type="button" className="Track-play" onClick={handlePlayButton}>
+        {isRepeated ? Icons.get('pause') : Icons.get('play')}
       </button>
-      <button type="button" className="Track-action" onClick={handleClick}>
+      <button type="button" className="Track-action" onClick={handleMoveTrack}>
         {isRemoval ? '-' : '+'}
       </button>
     </div>

@@ -81,12 +81,11 @@ export class App extends React.Component {
     this.setState({ paused: !this.state.paused })
   }
 
-  handleForwardClick = () => {}
-
-  handlePlaybackClick = () => {}
-
-  handleMuteClick = () => {
-    this.setState({ muted: !this.state.muted })
+  playButton = (track, isRepeated) => {
+    const pauseUpdate = { paused: !this.state.paused }
+    const playingTrackUpdate = { playingTrack: track, paused: false }
+    const state = isRepeated ? pauseUpdate : playingTrackUpdate
+    this.setState(state)
   }
 
   render() {
@@ -106,7 +105,10 @@ export class App extends React.Component {
             onKeyDown={this.getEnterDownHandler(this.search)}
           />
           <div className="App-playlist">
-            <SearchResults results={searchResults} onAdd={this.addTrack} />
+            <SearchResults
+              results={searchResults}
+              onAdd={this.addTrack}
+              onPlayButton={this.playButton}
             <Playlist
               name={playlistName}
               tracks={playlistTracks}
@@ -114,6 +116,7 @@ export class App extends React.Component {
               onNameChange={this.updatePlaylistName}
               onSave={this.savePlaylist}
               onKeyDown={this.getEnterDownHandler(this.savePlaylist)}
+              onPlayButton={this.playButton}
             />
             {playingTrack && (
           </div>
