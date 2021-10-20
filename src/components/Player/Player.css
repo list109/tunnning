@@ -4,6 +4,12 @@
   bottom: 0;
   left: 0;
   background: #607d8b;
+  transform: translateY(100%);
+}
+
+.player-set {
+  transform: translateY(0);
+  transition: transform 0.5s ease-out;
 }
 
 .container {
@@ -26,6 +32,10 @@
   flex-basis: 200px;
   flex-grow: 2;
   height: 100%;
+}
+
+.player-playback-passed {
+  transition: width 1s;
 }
 
 .player-time {
@@ -63,6 +73,10 @@
   border-radius: 3px;
 }
 
+.player-volume-level {
+  transition: width 0.5s;
+}
+
 /* common */
 .player-playback-total,
 .player-volume-total {
@@ -79,7 +93,6 @@
   top: 0;
   height: 100%;
   background: #7b96a3;
-  transition: width 0.5s;
 }
 
 /* media */

@@ -123,6 +123,8 @@ export class App extends React.Component {
               playingTrackID={playingTrackID}
             />
             {playingTrack && (
+              <Player paused={paused} track={playingTrack} onPauseClick={this.handlePauseClick} />
+            )}
           </div>
         </div>
       </div>

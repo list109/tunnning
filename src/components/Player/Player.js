@@ -6,9 +6,8 @@ export class Player extends React.Component {
   state = {
     muted: false
   }
-      child.style.width = `${
-        (percentages > 95 && 100) || (percentages < 5 && 0.01) || percentages
-      }%`
+
+  playerRef = React.createRef()
 
   processRangeChange = e => {
     const fraction = this.getFraction(e)
@@ -33,8 +32,8 @@ export class Player extends React.Component {
   render() {
     const { paused, onPauseClick } = this.props
 
-    const player = (
-      <div className="player">
+    return (
+      <div className="player" ref={this.playerRef}>
         <div className="container">
           <button className="player-replay" type="button" onClick={this.handleReplayClick}>
             {Icons.get('replay', 24)}
@@ -63,6 +62,7 @@ export class Player extends React.Component {
     )
   }
 
-    return sample && player
+  componentDidMount() {
+    setTimeout(() => (this.playerRef.current.className += ' player-set'))
   }
 }
