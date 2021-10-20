@@ -10,6 +10,8 @@ export function Playlist({
   onSave,
   onKeyDown,
   onPlayButton,
+  playingTrackID
+}) {
   const handleNameChange = ({ target }) => onNameChange(target.value)
   const handleKeyDown = ({ code }) => onKeyDown(code)
 
@@ -21,6 +23,8 @@ export function Playlist({
         isRemoval={true}
         onRemove={onRemove}
         onPlayButton={onPlayButton}
+        playingTrackID={playingTrackID}
+      />
       <button className="Playlist-save" onClick={onSave}>
         SAVE TO SPOTIFY
       </button>

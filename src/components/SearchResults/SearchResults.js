@@ -11,6 +11,8 @@ export function SearchResults({ results, onAdd, onPlayButton, playingTrackID }) 
         isRemoval={false}
         onAdd={onAdd}
         onPlayButton={onPlayButton}
+        playingTrackID={playingTrackID}
+      />
     </div>
   )
 }

@@ -3,6 +3,8 @@ import { Icons } from '../Icons/Icons'
 import './Track.css'
 
 export function Track({ track, isRemoval, onAdd, onRemove, onPlayButton, playingTrackID = null }) {
+  const { name, artists, album, id } = track
+  const isRepeated = playingTrackID === id
   const handleMoveTrack = () => (isRemoval ? onRemove(track) : onAdd(track))
   const handlePlayButton = () => onPlayButton(track, isRepeated)
   return (

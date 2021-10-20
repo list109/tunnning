@@ -89,9 +89,10 @@ export class App extends React.Component {
   }
 
   render() {
-    const { searchResults, playlistName, playlistTracks, searchTerm, sample, paused, muted } =
+    const { searchResults, playlistName, playlistTracks, searchTerm, paused, playingTrack } =
       this.state
 
+    const playingTrackID = paused ? '' : playingTrack.id
     return (
       <div>
         <h1>
@@ -109,6 +110,8 @@ export class App extends React.Component {
               results={searchResults}
               onAdd={this.addTrack}
               onPlayButton={this.playButton}
+              playingTrackID={playingTrackID}
+            />
             <Playlist
               name={playlistName}
               tracks={playlistTracks}
@@ -117,6 +120,7 @@ export class App extends React.Component {
               onSave={this.savePlaylist}
               onKeyDown={this.getEnterDownHandler(this.savePlaylist)}
               onPlayButton={this.playButton}
+              playingTrackID={playingTrackID}
             />
             {playingTrack && (
           </div>

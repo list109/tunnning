@@ -13,6 +13,7 @@ export function TrackList({ tracks, isRemoval, onAdd, onRemove, onPlayButton, pl
           onAdd={onAdd}
           onRemove={onRemove}
           onPlayButton={onPlayButton}
+          playingTrackID={playingTrackID}
         />
       ))}
     </div>
