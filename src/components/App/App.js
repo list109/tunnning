@@ -77,8 +77,6 @@ export class App extends React.Component {
       .catch(({ message }) => console.log(message))
   }
 
-  handleReplayClick() {}
-
   handlePauseClick = () => {
     this.setState({ paused: !this.state.paused })
   }
@@ -90,8 +88,6 @@ export class App extends React.Component {
   handleMuteClick = () => {
     this.setState({ muted: !this.state.muted })
   }
-
-  handleVolumeClick = () => {}
 
   render() {
     const { searchResults, playlistName, playlistTracks, searchTerm, sample, paused, muted } =
