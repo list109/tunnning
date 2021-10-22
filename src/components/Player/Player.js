@@ -40,7 +40,7 @@ export class Player extends React.Component {
           <button className="player-replay" type="button" onClick={this.handleReplayClick}>
             {Icons.get('replay', 24)}
           </button>
-          <button className="player-button" type="button" onClick={onPauseClick}>
+          <button className="player-button" type="button" onClick={onPlayButton}>
             {paused ? Icons.get('play') : Icons.get('pause')}
           </button>
           <button className="player-forward" type="button" onClick={this.handleForwardClick}>
