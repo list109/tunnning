@@ -30,7 +30,9 @@ export class Player extends React.Component {
   handleVolumeClick = e => this.processRangeChange(e)
 
   render() {
-    const { paused, onPauseClick } = this.props
+    const { paused, onPlayButton, track } = this.props
+    const { name: song, artists } = track
+    const title = track ? `${artists[0].name} - ${song}` : ''
 
     return (
       <div className="player" ref={this.playerRef}>
@@ -45,6 +47,7 @@ export class Player extends React.Component {
             {Icons.get('forward', 24)}
           </button>
           <div className="player-playback-total" onClick={this.handlePlaybackClick}>
+            <h2 className="player-playback-title">{title}</h2>
             <span className="player-playback-passed" style={{ width: '25%' }}></span>
           </div>
           <p className="player-time">
