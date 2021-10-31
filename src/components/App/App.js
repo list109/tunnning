@@ -16,7 +16,7 @@ export class App extends React.Component {
     playlistTracks: [],
 
     playingTrack: '',
-    paused: false
+    paused: true
   }
 
   handleTermChange = value => {
@@ -77,16 +77,17 @@ export class App extends React.Component {
       .catch(({ message }) => console.log(message))
   }
 
-  playerPlayButton = () => {
-    this.setState({ paused: !this.state.paused })
-  }
-
   trackPlayButton = (track, isRepeated) => {
     const pauseUpdate = { paused: !this.state.paused }
     const playingTrackUpdate = { playingTrack: track, paused: false }
     const state = isRepeated ? pauseUpdate : playingTrackUpdate
     this.setState(state)
   }
+
+  playerPlayButton = () => this.setState({ paused: !this.state.paused })
+
+
+  playerPlayEnded = () => this.setState({ paused: true })
 
   render() {
     const { searchResults, playlistName, playlistTracks, searchTerm, paused, playingTrack } =
@@ -123,7 +124,12 @@ export class App extends React.Component {
               playingTrackID={playingTrackID}
             />
             {playingTrack && (
-              <Player paused={paused} track={playingTrack} onPlayButton={this.playerPlayButton} />
+              <Player
+                paused={paused}
+                track={playingTrack}
+                onPlayButton={this.playerPlayButton}
+                onPlayEnded={this.playerPlayEnded}
+              />
             )}
           </div>
         </div>
