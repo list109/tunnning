@@ -31,7 +31,7 @@
   background-color: #6c41ec;
   text-align: center;
   font-size: 0.83rem;
-  transition: background-color 0.25s;
+  transition: background-color 0.15s ease-out;
   color: #fff;
   font-weight: 500;
 }
