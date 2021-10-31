@@ -38,19 +38,20 @@ export class App extends React.Component {
   }
 
   addTrack = track => {
-    const { playlistTracks } = this.state
-    const isPresent = playlistTracks.find(({ id }) => id === track.id)
-
-    if (isPresent) return
+    const { playlistTracks, searchResults } = this.state
 
     this.setState({
+      searchResults: searchResults.filter(({ id }) => track.id !== id),
       playlistTracks: [...playlistTracks, track]
     })
   }
 
   removeTrack = track => {
+    const { searchResults, playlistTracks } = this.state
+
     this.setState({
-      playlistTracks: this.state.playlistTracks.filter(({ id }) => id !== track.id)
+      searchResults: [...searchResults, track],
+      playlistTracks: playlistTracks.filter(({ id }) => id !== track.id)
     })
   }
 
