@@ -2,10 +2,10 @@ import React from 'react'
 import { Icons } from '../Icons/Icons'
 import './Track.css'
 
-export function Track({ track, isRemoval, onAdd, onRemove, onPlayButton, playingTrackID = null }) {
+export function Track({ track, isRemoval, onMovement, onPlayButton, playingTrackID = null }) {
   const { name, artists, album, id } = track
   const isRepeated = playingTrackID === id
-  const handleMoveTrack = () => (isRemoval ? onRemove(track) : onAdd(track))
+  const handleMoveTrack = () => onMovement(track)
   const handlePlayButton = () => onPlayButton(track, isRepeated)
   return (
     <div className="Track">

@@ -10,8 +10,7 @@ export function TrackList({ tracks, isRemoval, onAdd, onRemove, onPlayButton, pl
           key={track.id}
           track={track}
           isRemoval={isRemoval}
-          onAdd={onAdd}
-          onRemove={onRemove}
+          onMovement={isRemoval ? onRemove : onAdd}
           onPlayButton={onPlayButton}
           playingTrackID={playingTrackID}
         />
