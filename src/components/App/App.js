@@ -87,6 +87,39 @@ export class App extends React.Component {
 
   playerPlayButton = () => this.setState({ paused: !this.state.paused })
 
+  playerNextButton = () => {
+    const { searchResults, playlistTracks, playingTrack } = this.state
+    const lists = { searchResults, playlistTracks }
+    const listNames = Object.keys(lists)
+
+    let index
+
+    for (const name of listNames) {
+      index = lists[name].findIndex(({ id }) => id === playingTrack.id)
+
+      if (index === -1) continue
+
+      let nextTrack = lists[name][index + 1]
+
+      if (nextTrack) {
+        this.setState({ playingTrack: nextTrack })
+        return
+      }
+
+      nextTrack =
+        name === 'searchResults'
+          ? playlistTracks[0] || searchResults[0]
+          : searchResults[0] || playlistTracks[0]
+
+      this.setState({ playingTrack: nextTrack })
+      return
+    }
+
+    // if index is still equals -1 then a new track search has occured
+    if (index === -1) {
+      this.setState({ playingTrack: playlistTracks[0] || searchResults[0] || '' })
+    }
+  }
 
   playerPlayEnded = () => this.setState({ paused: true })
 
@@ -129,6 +162,7 @@ export class App extends React.Component {
                 paused={paused}
                 track={playingTrack}
                 onPlayButton={this.playerPlayButton}
+                onNextButton={this.playerNextButton}
                 onPlayEnded={this.playerPlayEnded}
               />
             )}
