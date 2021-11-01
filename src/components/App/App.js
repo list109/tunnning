@@ -80,7 +80,7 @@ export class App extends React.Component {
 
   trackPlayButton = (track, isRepeated) => {
     const pauseUpdate = { paused: !this.state.paused }
-    const playingTrackUpdate = { playingTrack: track, paused: false }
+    const playingTrackUpdate = { playingTrack: Object.assign({}, track), paused: false }
     const state = isRepeated ? pauseUpdate : playingTrackUpdate
     this.setState(state)
   }
