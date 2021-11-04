@@ -120,24 +120,26 @@ export const Spotify = {
   },
 
   getAccessToken() {
-    if (this.token) return this.token
+    const storedToken = localStorage.getItem('token')
+    const storedExpiration = localStorage.getItem('expiration')
 
-    const { access_token: token, expires_in: expTime, state } = this.getHashParams()
-    const localState = localStorage.getItem('state')
+    if (storedToken && Date.now() < storedExpiration) return storedToken
 
-    if (state && state !== localState) {
+    const { access_token: token, expires_in: expiration, state } = this.getHashParams()
+    const storedState = localStorage.getItem('state')
+
+    if (state && state !== storedState) {
       console.log('state mismatch error')
       return
     }
 
-    if (token && expTime) {
+    if (token && expiration) {
       localStorage.removeItem('state')
-
-      this.token = token
-      setTimeout(() => (this.token = null), expTime * 1000 - 1000)
+      localStorage.setItem('token', token)
+      localStorage.setItem('expiration', parseInt(expiration, 10) * 1000 + Date.now())
 
       window.history.replaceState({}, '', window.location.origin)
-      return this.token
+      return token
     }
 
     this.redirectToAuthorization()
@@ -184,7 +186,7 @@ export const Spotify = {
   },
 
   getRequestHeaders() {
-    return { Authorization: `Bearer ${this.token}` }
+    return { Authorization: `Bearer ${this.getAccessToken()}` }
   }
 }
 
