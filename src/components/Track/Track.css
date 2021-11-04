@@ -35,7 +35,7 @@
 .Track-action:hover,
 .Track-play:hover {
   color: rgba(265, 265, 265, 0.5);
-  fill: currentColor;
+  fill: rgba(265, 265, 265, 0.5);
 }
 
 .Track-information {

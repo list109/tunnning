@@ -16,7 +16,9 @@ export class App extends React.Component {
     playlistTracks: [],
 
     playingTrack: '',
-    paused: true
+    paused: true,
+
+    isSaving: false
   }
 
   handleTermChange = value => {
@@ -66,7 +68,7 @@ export class App extends React.Component {
       console.log("need a playlist's name or one or more tracks")
       return
     }
-
+    this.setState({ isSaving: true })
     Spotify.savePlaylist({ name, trackURIs })
       .then(response => {
         console.log('the playlist has been saved successfully')
@@ -76,6 +78,7 @@ export class App extends React.Component {
         })
       })
       .catch(({ message }) => console.log(message))
+      .finally(() => this.setState({ isSaving: false }))
   }
 
   trackPlayButton = (track, isRepeated) => {
@@ -124,8 +127,15 @@ export class App extends React.Component {
   playerPlayEnded = () => this.setState({ paused: true })
 
   render() {
-    const { searchResults, playlistName, playlistTracks, searchTerm, paused, playingTrack } =
-      this.state
+    const {
+      searchResults,
+      playlistName,
+      playlistTracks,
+      searchTerm,
+      paused,
+      playingTrack,
+      isSaving
+    } = this.state
     const playingTrackID = paused ? '' : playingTrack.id
 
     return (
@@ -156,6 +166,7 @@ export class App extends React.Component {
               onKeyDown={this.getEnterDownHandler(this.savePlaylist)}
               onPlayButton={this.trackPlayButton}
               playingTrackID={playingTrackID}
+              isSaving={isSaving}
             />
             {playingTrack && (
               <Player
