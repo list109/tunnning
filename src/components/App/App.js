@@ -88,6 +88,20 @@ export class App extends React.Component {
     this.setState(state)
   }
 
+  undoPlaylist = playlistName => {
+    const { searchResults, playlistTracks } = this.state
+
+    this.setState({
+      playlistName,
+      searchResults: [...searchResults, ...playlistTracks],
+      playlistTracks: []
+    })
+  }
+
+  removePlaylist = () => {
+    this.setState({ playlistTracks: [] })
+  }
+
   playerPlayButton = () => this.setState({ paused: !this.state.paused })
 
   playerNextButton = () => {
@@ -159,8 +173,11 @@ export class App extends React.Component {
             />
             <Playlist
               name={playlistName}
+              defaultName={this.playlistName}
               tracks={playlistTracks}
-              onRemove={this.removeTrack}
+              onRemove={this.removePlaylist}
+              onUndo={this.undoPlaylist}
+              onRemoveTrack={this.removeTrack}
               onNameChange={this.updatePlaylistName}
               onSave={this.savePlaylist}
               onKeyDown={this.getEnterDownHandler(this.savePlaylist)}

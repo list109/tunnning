@@ -59,6 +59,21 @@ export const Icons = {
     </svg>
   ),
 
+  undo: viewBox => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox={viewBox}>
+      <title>undo</title>
+      <path d="M28 8v20h-24v-4h20v-12h-6.071l3.657 3.66-2.828 2.83-8.485-8.484 8.485-8.485 2.828 2.826-3.657 3.653h10.071z"></path>
+    </svg>
+  ),
+
+  remove: viewBox => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox={viewBox}>
+      <title>remove</title>
+      <path d="M16 0c-8.837 0-16 7.163-16 16s7.163 16 16 16 16-7.163 16-16-7.163-16-16-16zM16 29c-7.18 0-13-5.82-13-13s5.82-13 13-13 13 5.82 13 13-5.82 13-13 13z"></path>
+      <path d="M21 8l-5 5-5-5-3 3 5 5-5 5 3 3 5-5 5 5 3-3-5-5 5-5z"></path>
+    </svg>
+  ),
+
   get(iconName, w = 32, h) {
     const viewBox = `0 0 ${w} ${h || w}`
     return this[iconName](viewBox)
