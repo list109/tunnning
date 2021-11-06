@@ -5,30 +5,22 @@
 }
 
 .Track-play {
-  box-sizing: border-box;
-  height: 20px;
+  box-sizing: content-box;
   min-width: 20px;
-  background: transparent;
-  box-shadow: none;
-  border: none;
+  height: 20px;
   fill: #fff;
-  cursor: pointer;
-  margin-right: auto;
-  padding: 0;
-  margin-right: 5px;
+  padding: 0.5rem 0;
 }
 
 .Track-action {
-  cursor: pointer;
   padding: 0.5rem;
   font-size: 1.05rem;
-  border: 0px;
-  background-color: rgba(0, 0, 0, 0);
   color: #fff;
 }
 
 .Track-play,
 .Track-action {
+  cursor: pointer;
   transition: fill 0.25s, color 0.25s;
 }
 
