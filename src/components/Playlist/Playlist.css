@@ -1,16 +1,18 @@
 .Playlist {
+  box-sizing: border-box;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow-y: scroll;
-  width: 37%;
-  max-height: 950px;
+  /* width: 37%; */
+  width: 41%;
+  max-height: 981px;
   /* padding: 2.27rem 1.16rem; */
-  padding: 1.8rem 1.16rem;
+  padding: 1.8rem 1.16rem 2.27rem;
   background-color: rgba(1, 12, 63, 0.7);
   box-shadow: 0 4px 2px 2px #000000;
-  transition: height 1s ease-out;
+  transition: height 0.5s ease-out;
 }
 
 .Playlist.loading::before {
@@ -31,7 +33,7 @@
 
 .Playlist-panel {
   align-self: flex-end;
-  padding-bottom: 0.47rem;
+  margin-bottom: 0.47rem;
 }
 
 .Playlist-panel button {
@@ -58,6 +60,8 @@
 }
 
 .Playlist input {
+  box-sizing: border-box;
+  flex-basis: 45px;
   width: 100%;
   border: 0;
   outline: 0;
@@ -121,6 +125,7 @@
 
 @media only screen and (max-width: 1020px) {
   .Playlist {
-    width: 90%;
+    /* width: 90%; */
+    width: 98%;
   }
 }
