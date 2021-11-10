@@ -1,8 +1,8 @@
 import React from 'react'
 import { SearchBar } from '../SearchBar/SearchBar'
 import { SearchResults } from '../SearchResults/SearchResults'
-import { Playlist } from '../Playlist/Playlist'
 import { Player } from '../Player/Player'
+import { Playlists } from '../Playlists/Playlists'
 import { Spotify } from '../../util/Spotify'
 import './App.css'
 
@@ -88,11 +88,11 @@ export class App extends React.Component {
     this.setState(state)
   }
 
-  undoPlaylist = playlistName => {
+  undoPlaylist = () => {
     const { searchResults, playlistTracks } = this.state
 
     this.setState({
-      playlistName,
+      playlistName: this.playlistName,
       searchResults: [...searchResults, ...playlistTracks],
       playlistTracks: []
     })
@@ -164,19 +164,17 @@ export class App extends React.Component {
             onChange={this.handleTermChange}
             onKeyDown={this.getEnterDownHandler(this.search)}
           />
-          <div className="App-playlist">
+          <div className="App-bars">
             <SearchResults
               results={searchResults}
               onAdd={this.addTrack}
               onPlayButton={this.trackPlayButton}
               playingTrackID={playingTrackID}
             />
-            <Playlist
-              name={playlistName}
+            <Playlists
+              playlistName={playlistName}
               defaultName={this.playlistName}
-              tracks={playlistTracks}
-              onRemove={this.removePlaylist}
-              onUndo={this.undoPlaylist}
+              playlistTracks={playlistTracks}
               onRemoveTrack={this.removeTrack}
               onNameChange={this.updatePlaylistName}
               onSave={this.savePlaylist}
@@ -184,6 +182,8 @@ export class App extends React.Component {
               onPlayButton={this.trackPlayButton}
               playingTrackID={playingTrackID}
               isSaving={isSaving}
+              onUndoPlaylist={this.undoPlaylist}
+              onRemovePlaylist={this.removePlaylist}
             />
             {playingTrack && (
               <Player

@@ -1,0 +1,19 @@
+.Playlists {
+  display: flex;
+  flex-direction: column;
+  width: 41%;
+  box-sizing: border-box;
+  background-color: rgba(1, 12, 63, 0.7);
+  box-shadow: 0 4px 2px 2px #000000;
+  max-height: 981px;
+  /* padding: 2.27rem 1.16rem; */
+  padding: 1.8rem 1.16rem 2.27rem;
+  background-color: rgba(1, 12, 63, 0.7);
+  box-shadow: 0 4px 2px 2px #000000;
+}
+
+@media only screen and (max-width: 1020px) {
+  .Playlists {
+    width: 98%;
+  }
+}

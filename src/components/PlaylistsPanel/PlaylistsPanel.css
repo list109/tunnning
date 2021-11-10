@@ -1,0 +1,29 @@
+.PlaylistPanel {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+}
+
+.PlaylistPanel button {
+  position: relative;
+  box-sizing: content-box;
+  width: 20px;
+  height: 20px;
+  padding: 0.8em;
+  fill: #fff;
+  cursor: pointer;
+  transition: fill 0.25s, color 0.25s;
+}
+
+.PlaylistPanel-list {
+  margin-right: auto;
+}
+
+.PlaylistPanel button:disabled {
+  fill: rgb(146, 131, 131);
+}
+
+.PlaylistPanel button:not(:disabled):hover {
+  fill: rgba(265, 265, 265, 0.5);
+}

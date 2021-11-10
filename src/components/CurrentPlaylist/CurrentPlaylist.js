@@ -1,18 +1,14 @@
 import React from 'react'
 import { TrackList } from '../TrackList/TrackList'
-import { Icons } from '../Icons/Icons'
-import './Playlist.css'
+import './CurrentPlaylist.css'
 
-export class Playlist extends React.Component {
+export class CurrentPlaylist extends React.Component {
   playlistRef = React.createRef()
 
   render() {
     const {
       name,
-      defaultName,
       tracks,
-      onRemove,
-      onUndo,
       onRemoveTrack,
       onNameChange,
       onSave,
@@ -25,29 +21,8 @@ export class Playlist extends React.Component {
     const handleNameChange = ({ target }) => onNameChange(target.value)
     const handleKeyDown = ({ code }) => onKeyDown(code)
 
-    const disableRemove = tracks.length === 0
-    const disableUndo = disableRemove && name === defaultName
-
     return (
       <div className={`Playlist${isSaving ? ' loading' : ''}`} ref={this.playlistRef}>
-        <div className="Playlist-panel">
-          <button
-            type="button"
-            className="Playlist-undo"
-            onClick={() => onUndo(defaultName)}
-            disabled={disableUndo}
-          >
-            {Icons.get('undo')}
-          </button>
-          <button
-            type="button"
-            className="Playlist-remove"
-            onClick={onRemove}
-            disabled={disableRemove}
-          >
-            {Icons.get('remove')}
-          </button>
-        </div>
         <input value={name} onChange={handleNameChange} onKeyDown={handleKeyDown} />
         <TrackList
           tracks={tracks}

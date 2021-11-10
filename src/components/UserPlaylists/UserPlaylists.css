@@ -1,0 +1,38 @@
+.UserPlaylists {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  transition: height ease-in 1s;
+}
+
+.UserPlaylists.animated {
+  height: 300px;
+}
+
+.UserPlaylists-icon {
+  position: absolute;
+  top: calc(40% - 20px);
+  left: calc(50% - 20px);
+  display: block;
+  width: 40px;
+  height: 40px;
+  fill: #fff;
+  opacity: 0;
+  transition: opacity 1s ease-in 0s;
+  animation: loading 2s linear infinite;
+}
+
+.UserPlaylists.animated .UserPlaylists-icon {
+  opacity: 1;
+  /* transition-delay: 0.25s; */
+  transition-duration: 2s;
+}
+
+@keyframes loading {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
