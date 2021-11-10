@@ -1,6 +1,6 @@
 import React from 'react'
-import './Player.css'
 import { Icons } from '../Icons/Icons'
+import './Player.css'
 
 export class Player extends React.Component {
   state = {
@@ -116,40 +116,40 @@ export class Player extends React.Component {
     this.seconds.total = duration || 0
 
     return (
-      <div className="player" ref={this.playerRef}>
+      <div className="Player" ref={this.playerRef}>
         <div className="container">
-          <button className="player-rewind" type="button" onClick={this.handleRewindClick}>
+          <button className="Player-rewind" type="button" onClick={this.handleRewindClick}>
             {Icons.get('rewind', 24)}
           </button>
-          <button className="player-button" type="button" onClick={this.handlePlayClick}>
+          <button className="Player-button" type="button" onClick={this.handlePlayClick}>
             {paused ? Icons.get('play') : Icons.get('pause')}
           </button>
-          <button className="player-next" type="button" onClick={this.handleNextClick}>
+          <button className="Player-next" type="button" onClick={this.handleNextClick}>
             {Icons.get('next')}
           </button>
-          <button className="player-forward" type="button" onClick={this.handleForwardClick}>
+          <button className="Player-forward" type="button" onClick={this.handleForwardClick}>
             {Icons.get('forward', 24)}
           </button>
-          <div className="player-playback" onClick={this.handlePlaybackClick}>
-            <div className="player-playback-total" ref={this.playbackRef}>
-              <h2 className="player-playback-title">{title}</h2>
+          <div className="Player-playback" onClick={this.handlePlaybackClick}>
+            <div className="Player-playback-total" ref={this.playbackRef}>
+              <h2 className="Player-playback-title">{title}</h2>
               <span
-                className="player-playback-passed"
+                className="Player-playback-passed"
                 style={{ width: currentPosition * 100 + '%' }}
               ></span>
             </div>
           </div>
-          <p className="player-time">
-            <time className="player-time-passed">{this.seconds.passed}</time>
-            <time className="player-time-duration">{this.seconds.total}</time>
+          <p className="Player-time">
+            <time className="Player-time-passed">{this.seconds.passed}</time>
+            <time className="Player-time-duration">{this.seconds.total}</time>
           </p>
-          <button className="player-mute" type="button" onClick={this.handleMuteClick}>
+          <button className="Player-mute" type="button" onClick={this.handleMuteClick}>
             {this.state.muted ? Icons.get('mute') : Icons.get('volume')}
           </button>
-          <div className="player-volume" onClick={this.handleVolumeClick}>
-            <div className="player-volume-total" ref={this.volRef}>
+          <div className="Player-volume" onClick={this.handleVolumeClick}>
+            <div className="Player-volume-total" ref={this.volRef}>
               <span
-                className="player-volume-level"
+                className="Player-volume-level"
                 style={{ width: muted ? 0 : volume * 100 + '%' }}
               ></span>
             </div>
@@ -161,7 +161,7 @@ export class Player extends React.Component {
 
   // canplay - playing - timeupdate - seeking - loadedmetadata - seeked - emptied
   componentDidMount() {
-    setTimeout(() => (this.playerRef.current.className += ' player-set'))
+    setTimeout(() => (this.playerRef.current.className += ' Player-set'))
 
     this.player.volume = this.state.volume
 
