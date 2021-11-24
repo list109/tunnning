@@ -9,10 +9,3 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
-
-button {
-  box-shadow: none;
-  border: none;
-  padding: 0;
-  background-color: rgba(0, 0, 0, 0);
-}
