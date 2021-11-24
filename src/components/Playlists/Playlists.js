@@ -24,20 +24,16 @@ export class Playlists extends React.Component {
       playingTrackID,
       isSaving,
       onUndoPlaylist,
-      onRemovePlaylist
+      userPlaylists,
+      onLoadPlaylists,
     } = this.props
 
     const disableRemove = playlistTracks.length === 0
     const disableUndo = disableRemove && playlistName === defaultName
 
     return (
-      <div className="Playlists">
-        <PlaylistsPanel
-          disableUndo={disableUndo}
-          onUndo={onUndoPlaylist}
-          disableRemove={disableRemove}
-          onRemove={onRemovePlaylist}
-          onToggle={this.togglePlaylists}
+          playlists={userPlaylists}
+          onLoad={onLoadPlaylists}
         />
         <UserPlaylists toggled={this.state.toggled} />
         <CurrentPlaylist

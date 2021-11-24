@@ -39,10 +39,9 @@ export const Spotify = {
 
     const userId = await this.getUserId()
     const playlistResponse = await this.createPlaylist(name, userId)
-    const { id: playlistId } = playlistResponse
+    const { id } = playlistResponse
 
-    const tracksResponse = await this.saveTracks({ playlistId, trackURIs })
-    return tracksResponse
+    return await this.saveTracks({ id, trackURIs })
   },
 
   async getUserId() {
@@ -68,12 +67,37 @@ export const Spotify = {
     return this.fetchJson(url, options)
   },
 
-  async saveTracks({ playlistId, trackURIs }) {
-    const url = `${this.getUrl('playlists')}/${playlistId}/tracks?uris=${trackURIs.join(',')}`
+  async saveTracks({ id, trackURIs }) {
+    const url = `${this.getUrl('playlists')}/${id}/tracks?uris=${trackURIs.join(',')}`
     const options = {
       method: 'POST',
       headers: this.getRequestHeaders()
     }
+    return this.fetchJson(url, options)
+  },
+
+  async getPlaylists() {
+    const options = {
+      headers: this.getRequestHeaders()
+    }
+
+    const { items: playlists } = await this.fetchJson(this.getUrl('me/playlists'), options)
+
+    return playlists
+  },
+
+  async renamePlaylist({ id, name }) {
+    const url = this.getUrl(`playlists/${id}`)
+
+    const options = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.getAccessToken()}`
+      },
+      body: JSON.stringify({ name: name, description: 'description' })
+    }
+
     return this.fetchJson(url, options)
   },
 
@@ -111,9 +135,11 @@ export const Spotify = {
       const jsonResponse = await response.json()
       return jsonResponse
     } catch (err) {
+      if (options.method === 'PUT') return
+
       console.log(err.message)
       throw new SpotifyError({
-        status: 'Incorrects response from the server',
+        status: 'Incorrect response from the server',
         message: 'Could not convert the response data'
       })
     }

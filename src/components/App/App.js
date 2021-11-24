@@ -15,6 +15,10 @@ export class App extends React.Component {
     playlistName: this.playlistName,
     playlistTracks: [],
 
+    userPlaylists: [],
+    isLoading: false,
+
+    //have to keep these player state values on the top to sync with other components
     playingTrack: '',
     paused: true,
 
@@ -98,8 +102,26 @@ export class App extends React.Component {
     })
   }
 
-  removePlaylist = () => {
-    this.setState({ playlistTracks: [] })
+  loadUserPlaylists = () => {
+    if (this.state.isLoading) return
+    console.log('onLoad')
+    this.setState({ isLoading: true, userPlaylists: [] })
+
+    Spotify.getPlaylists()
+      .then(playlists => {
+        this.setState({
+          userPlaylists: playlists.length
+            ? playlists
+            : ["You hasn't created any playlist on your account yet"]
+        })
+        console.log(playlists)
+      })
+      .catch(err => {
+        console.log(err)
+        this.setState({ userPlaylists: ['Error has occured'] })
+      })
+      .finally(() => this.setState({ isLoading: false }))
+  }
   }
 
   playerPlayButton = () => this.setState({ paused: !this.state.paused })
@@ -148,6 +170,7 @@ export class App extends React.Component {
       searchTerm,
       paused,
       playingTrack,
+      userPlaylists,
       isSaving
     } = this.state
     const playingTrackID = paused ? '' : playingTrack.id
@@ -175,13 +198,13 @@ export class App extends React.Component {
               playlistName={playlistName}
               defaultName={this.playlistName}
               playlistTracks={playlistTracks}
+              userPlaylists={userPlaylists}
               onRemoveTrack={this.removeTrack}
               onNameChange={this.updatePlaylistName}
               onSave={this.savePlaylist}
               onKeyDown={this.getEnterDownHandler(this.savePlaylist)}
               onPlayButton={this.trackPlayButton}
-              playingTrackID={playingTrackID}
-              isSaving={isSaving}
+              onLoadPlaylists={this.loadUserPlaylists}
               onUndoPlaylist={this.undoPlaylist}
               onRemovePlaylist={this.removePlaylist}
             />
