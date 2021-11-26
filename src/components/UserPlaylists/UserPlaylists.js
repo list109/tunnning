@@ -50,6 +50,43 @@ export class UserPlaylists extends React.Component {
 
     container.classList[isToggled ? 'add' : 'remove']('toggled')
   }
+
+  resizeContainer = ({ isToggled: prevIsToggled, playlists: prevPlaylists }) => {
+    const { current: container } = this.containerRef
+    const { isToggled, playlists } = this.props
+
+    const notToggled = prevIsToggled === isToggled
+    const notChanged = playlists.length === prevPlaylists.length
+
+    if (notToggled && notChanged) return
+    if (notToggled && isToggled === false) return
+
+    if (isToggled && prevIsToggled && playlists.length > 0 && prevPlaylists.length < 1) {
+      const prevHeight = container.offsetHeight + 'px'
+      container.style.height = 'auto'
+      const autoHeight = container.offsetHeight
+      container.style.height = prevHeight
+      getComputedStyle(container).getPropertyValue('height')
+      container.style.height = Math.max(autoHeight, 400) + 'px'
+      return
+    }
+
+    container.style.height = `${isToggled ? Math.max(container.scrollHeight, 400) : 0}px`
+  }
+
+  startLoading() {
+    const { isToggled, playlists, onLoad } = this.props
+    if (playlists.length < 1 && isToggled) onLoad()
+  }
+
+  componentDidMount() {
+    const { current: container } = this.containerRef
+    container.style.height = '0px'
+  }
+
+  componentDidUpdate(prevProps) {
     this.startLoading()
     this.changeClasses()
+    this.resizeContainer(prevProps)
+  }
 }

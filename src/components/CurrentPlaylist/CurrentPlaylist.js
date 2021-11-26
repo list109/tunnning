@@ -52,24 +52,25 @@ export class CurrentPlaylist extends React.Component {
 
   componentDidUpdate({ tracks: prevTracks }) {
     const { current: playlist } = this.playlistRef
+    const { tracks } = this.props
     const { clientHeight, scrollHeight } = playlist
 
-    if (prevTracks.length === this.props.tracks.length) return
+    if (prevTracks.length === tracks.length) return
 
-    if (this.props.tracks.length > prevTracks.length) {
+    if (tracks.length > prevTracks.length) {
       if (clientHeight === scrollHeight) return
       playlist.style.height = playlist.scrollHeight + 'px'
     }
 
-    if (this.props.tracks.length < prevTracks.length) {
+    if (tracks.length < prevTracks.length) {
       const prevHeight = playlist.offsetHeight
-
       playlist.style.height = 'auto'
 
       const height = playlist.offsetHeight
-
       playlist.style.height = prevHeight + 'px'
+
       getComputedStyle(playlist).getPropertyValue('height')
+
       playlist.style.height = height + 'px'
     }
   }
