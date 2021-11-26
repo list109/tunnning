@@ -66,7 +66,7 @@ export class Player extends React.Component {
   handleVolumeClick = e => {
     const fraction = this.getFraction(e, this.volRef.current)
     const volume = (fraction < 0.1 && '0') || (fraction > 0.9 && '1') || fraction.toFixed(5)
-    this.setState({ volume })
+    this.setState({ volume, muted: false })
   }
 
   handleTimeUpdate = () => {
@@ -118,16 +118,32 @@ export class Player extends React.Component {
     return (
       <div className="Player" ref={this.playerRef}>
         <div className="container">
-          <button className="Player-rewind" type="button" onClick={this.handleRewindClick}>
+          <button
+            className="Player-button Player-rewind"
+            type="button"
+            onClick={this.handleRewindClick}
+          >
             {Icons.get('rewind', 24)}
           </button>
-          <button className="Player-button" type="button" onClick={this.handlePlayClick}>
+          <button
+            className="Player-button Player-play"
+            type="button"
+            onClick={this.handlePlayClick}
+          >
             {paused ? Icons.get('play') : Icons.get('pause')}
           </button>
-          <button className="Player-next" type="button" onClick={this.handleNextClick}>
+          <button
+            className="Player-button Player-next"
+            type="button"
+            onClick={this.handleNextClick}
+          >
             {Icons.get('next')}
           </button>
-          <button className="Player-forward" type="button" onClick={this.handleForwardClick}>
+          <button
+            className="Player-button Player-forward"
+            type="button"
+            onClick={this.handleForwardClick}
+          >
             {Icons.get('forward', 24)}
           </button>
           <div className="Player-playback" onClick={this.handlePlaybackClick}>
@@ -143,7 +159,11 @@ export class Player extends React.Component {
             <time className="Player-time-passed">{this.seconds.passed}</time>
             <time className="Player-time-duration">{this.seconds.total}</time>
           </p>
-          <button className="Player-mute" type="button" onClick={this.handleMuteClick}>
+          <button
+            className="Player-button Player-mute"
+            type="button"
+            onClick={this.handleMuteClick}
+          >
             {this.state.muted ? Icons.get('mute') : Icons.get('volume')}
           </button>
           <div className="Player-volume" onClick={this.handleVolumeClick}>

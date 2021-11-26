@@ -76,7 +76,7 @@
   color: rgb(197, 197, 197);
 }
 
-.Player button {
+.Player-button {
   cursor: pointer;
   width: 52px;
   height: 52px;
@@ -86,6 +86,10 @@
   border: none !important;
   color: #c8d2d7 !important;
   fill: currentColor;
+}
+
+.Player-button:active {
+  fill: #fff;
 }
 
 .Player-volume {
@@ -128,7 +132,7 @@
   .Player .container {
     height: 50px;
   }
-  .Player button {
+  .Player-button {
     width: 42px;
     height: 42px;
     padding: 0px;
