@@ -6,10 +6,17 @@
   background-color: rgba(1, 12, 63, 0.7);
   box-shadow: 0 4px 2px 2px #000000;
   max-height: 981px;
-  /* padding: 2.27rem 1.16rem; */
-  padding: 1.8rem 1.16rem 2.27rem;
+  padding: 1.8rem 1.16rem 0;
+  border-bottom: 2.27rem solid transparent;
   background-color: rgba(1, 12, 63, 0.7);
   box-shadow: 0 4px 2px 2px #000000;
+
+  overflow-y: scroll;
+  transition: height 1s ease-out;
+}
+
+.Playlists > * {
+  flex-shrink: 0;
 }
 
 @media only screen and (max-width: 1020px) {

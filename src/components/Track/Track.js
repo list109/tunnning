@@ -15,10 +15,10 @@ export function Track({ track, isRemoval, onMovement, onPlayButton, playingTrack
           {artists[0]?.name} | {album?.name}
         </p>
       </div>
-      <button type="button" className="Track-play" onClick={handlePlayButton}>
+      <button type="button" className="Track-button Track-play" onClick={handlePlayButton}>
         {isRepeated ? Icons.get('pause') : Icons.get('play')}
       </button>
-      <button type="button" className="Track-action" onClick={handleMoveTrack}>
+      <button type="button" className="Track-button Track-action" onClick={handleMoveTrack}>
         {isRemoval ? '-' : '+'}
       </button>
     </div>

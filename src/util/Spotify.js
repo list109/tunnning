@@ -91,11 +91,8 @@ export const Spotify = {
 
     const options = {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.getAccessToken()}`
-      },
-      body: JSON.stringify({ name: name, description: 'description' })
+      headers: this.getRequestHeaders(),
+      body: JSON.stringify({ name })
     }
 
     return this.fetchJson(url, options)

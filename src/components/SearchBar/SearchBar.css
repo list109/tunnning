@@ -29,7 +29,7 @@
   background-color: #010c3f;
   text-align: center;
   font-size: 0.833rem;
-  transition: background-color 0.25s;
+  transition: all 0.25s;
   border: 0px;
   color: #fff;
   font-weight: 500;

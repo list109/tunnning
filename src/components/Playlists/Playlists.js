@@ -16,19 +16,20 @@ export class Playlists extends React.Component {
       playlistTracks,
       onRemoveTrack,
       onNameChange,
-      onSave,
       onKeyDown,
       onPlayButton,
       playingTrackID,
-      isSaving,
       onUndoPlaylist,
+      onSavePlaylist,
       userPlaylists,
       onLoadPlaylists,
       onRenamePlaylist,
+      isSaving
     } = this.props
 
-    const disableRemove = playlistTracks.length === 0
-    const disableUndo = disableRemove && playlistName === defaultName
+    const { isToggled } = this.state
+
+    const disableUndo = playlistTracks.length === 0 && playlistName === defaultName
 
     return (
       <div className={`Playlists`}>
@@ -39,17 +40,18 @@ export class Playlists extends React.Component {
           onLoad={onLoadPlaylists}
           onRenamePlaylist={onRenamePlaylist}
         />
-        <UserPlaylists toggled={this.state.toggled} />
         <CurrentPlaylist
           name={playlistName}
           tracks={playlistTracks}
-          onRemoveTrack={onRemoveTrack}
-          onNameChange={onNameChange}
-          onSave={onSave}
-          onKeyDown={onKeyDown}
-          onPlayButton={onPlayButton}
+          disableUndo={disableUndo}
           playingTrackID={playingTrackID}
           isSaving={isSaving}
+          onNameChange={onNameChange}
+          onUndo={onUndoPlaylist}
+          onSave={onSavePlaylist}
+          onKeyDown={onKeyDown}
+          onRemoveTrack={onRemoveTrack}
+          onPlayButton={onPlayButton}
         />
       </div>
     )

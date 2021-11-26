@@ -1,5 +1,6 @@
 import React from 'react'
 import { TrackList } from '../TrackList/TrackList'
+import { Icons } from '../Icons/Icons'
 import './CurrentPlaylist.css'
 
 export class CurrentPlaylist extends React.Component {
@@ -9,6 +10,8 @@ export class CurrentPlaylist extends React.Component {
     const {
       name,
       tracks,
+      disableUndo,
+      onUndo,
       onRemoveTrack,
       onNameChange,
       onSave,
@@ -22,8 +25,18 @@ export class CurrentPlaylist extends React.Component {
     const handleKeyDown = ({ code }) => onKeyDown(code)
 
     return (
-      <div className={`Playlist${isSaving ? ' loading' : ''}`} ref={this.playlistRef}>
-        <input value={name} onChange={handleNameChange} onKeyDown={handleKeyDown} />
+      <div className={`CurrentPlaylist${isSaving ? ' saving' : ''}`} ref={this.playlistRef}>
+        <div className={'CurrentPlaylist-input'}>
+          <input value={name} onChange={handleNameChange} onKeyDown={handleKeyDown} />
+          <button
+            type="button"
+            className="CurrentPlaylist-undo"
+            disabled={disableUndo}
+            onClick={onUndo}
+          >
+            {Icons.get('undo')}
+          </button>
+        </div>
         <TrackList
           tracks={tracks}
           isRemoval={true}
@@ -31,7 +44,7 @@ export class CurrentPlaylist extends React.Component {
           onPlayButton={onPlayButton}
           playingTrackID={playingTrackID}
         />
-        <button className={`Playlist-save`} onClick={onSave}>
+        <button className={`CurrentPlaylist-save`} onClick={onSave}>
           {isSaving ? 'SAVING...' : 'SAVE TO SPOTIFY'}
         </button>
       </div>
@@ -40,7 +53,6 @@ export class CurrentPlaylist extends React.Component {
 
   componentDidMount() {
     const { current: playlist } = this.playlistRef
-
     playlist.style.height = playlist.offsetHeight + 'px'
 
     playlist.ontransitionend = ({ propertyName }) => {
