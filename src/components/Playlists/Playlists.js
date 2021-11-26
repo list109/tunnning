@@ -5,11 +5,9 @@ import { UserPlaylists } from '../UserPlaylists/UserPlaylists'
 import './Playlists.css'
 
 export class Playlists extends React.Component {
-  state = { toggled: false }
+  state = { isToggled: false }
 
-  togglePlaylists = () => {
-    this.setState({ toggled: !this.state.toggled })
-  }
+  togglePlaylists = () => this.setState({ isToggled: !this.state.isToggled })
 
   render() {
     const {
@@ -33,6 +31,10 @@ export class Playlists extends React.Component {
     const disableUndo = disableRemove && playlistName === defaultName
 
     return (
+      <div className={`Playlists`}>
+        <PlaylistsPanel onToggle={this.togglePlaylists} />
+        <UserPlaylists
+          isToggled={isToggled}
           playlists={userPlaylists}
           onLoad={onLoadPlaylists}
           onRenamePlaylist={onRenamePlaylist}
