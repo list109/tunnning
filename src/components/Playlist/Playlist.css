@@ -1,0 +1,62 @@
+.Playlist {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(256, 256, 256, 0.8);
+  padding: 0.75rem 0;
+}
+
+.Playlist-information {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 2px;
+
+  align-items: flex-start;
+}
+
+.Playlist-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.22rem;
+}
+
+.Playlist-information h3 {
+  padding-right: 0.9rem;
+  line-height: 1.4em;
+}
+
+.Playlist-information h3:focus,
+.Playlist-information h3:focus-visible {
+  box-shadow: none;
+  border: none;
+  outline: none;
+  color: rgb(214, 214, 214);
+  font-weight: 100;
+  letter-spacing: 0.03em;
+}
+
+.Playlist-information p {
+  font-size: 0.83rem;
+  font-weight: 300;
+  color: rgba(256, 256, 256, 0.8);
+}
+
+.Playlist-button {
+  flex-shrink: 0;
+  box-sizing: content-box;
+
+  padding: 0.5rem 0.35rem;
+  font-size: 1.05rem;
+}
+
+.Playlist-remove {
+  width: 20px;
+  height: 20px;
+}
+
+.Playlist-edit {
+  width: 14px;
+  height: 14px;
+  padding-top: 0.3rem;
+}

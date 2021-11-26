@@ -26,6 +26,7 @@ export class Playlists extends React.Component {
       onUndoPlaylist,
       userPlaylists,
       onLoadPlaylists,
+      onRenamePlaylist,
     } = this.props
 
     const disableRemove = playlistTracks.length === 0
@@ -34,6 +35,7 @@ export class Playlists extends React.Component {
     return (
           playlists={userPlaylists}
           onLoad={onLoadPlaylists}
+          onRenamePlaylist={onRenamePlaylist}
         />
         <UserPlaylists toggled={this.state.toggled} />
         <CurrentPlaylist

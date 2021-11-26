@@ -122,6 +122,22 @@ export class App extends React.Component {
       })
       .finally(() => this.setState({ isLoading: false }))
   }
+
+  renameUserPlaylist = ({ id, name, prevName = 'Untitled' }) => {
+    const isVerified = id && name
+    if (isVerified === false)
+      console.log('id and name are the arguments both required to rename a playlist')
+
+    Spotify.renamePlaylist({ id, name, prevName })
+      .then(() => {
+        console.log('Playlist renamed')
+      })
+      .catch(err => {
+        console.log(err)
+      })
+      .finally(() => this.setState({}))
+  }
+
   }
 
   playerPlayButton = () => this.setState({ paused: !this.state.paused })
@@ -206,7 +222,7 @@ export class App extends React.Component {
               onPlayButton={this.trackPlayButton}
               onLoadPlaylists={this.loadUserPlaylists}
               onUndoPlaylist={this.undoPlaylist}
-              onRemovePlaylist={this.removePlaylist}
+              onRenamePlaylist={this.renameUserPlaylist}
             />
             {playingTrack && (
               <Player
