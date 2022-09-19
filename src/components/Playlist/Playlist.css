@@ -5,19 +5,46 @@
   padding: 0.75rem 0;
 }
 
+.Playlist .Playlist-title > * {
+  transition: fill 0.5s, color 0.5s;
+}
+
+.Playlist.renaming .Playlist-title {
+  font-weight: 100;
+  letter-spacing: 0.03em;
+}
+
+.Playlist.renaming .Playlist-title > * {
+  color: rgba(265, 265, 265, 0.5);
+}
+
+.Playlist.renaming .Playlist-edit {
+  cursor: default;
+  animation: Renaming 2s linear infinite;
+}
+
+@keyframes Renaming {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .Playlist-information {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-right: 2px;
-
   align-items: flex-start;
 }
 
 .Playlist-title {
   display: flex;
   align-items: center;
+
   margin-bottom: 0.22rem;
 }
 
@@ -25,7 +52,6 @@
   padding-right: 0.9rem;
   line-height: 1.4em;
 }
-
 .Playlist-information h3:focus,
 .Playlist-information h3:focus-visible {
   box-shadow: none;
@@ -45,8 +71,6 @@
 .Playlist-button {
   flex-shrink: 0;
   box-sizing: content-box;
-
-  padding: 0.5rem 0.35rem;
   font-size: 1.05rem;
 }
 
@@ -56,7 +80,6 @@
 }
 
 .Playlist-edit {
-  width: 14px;
-  height: 14px;
-  padding-top: 0.3rem;
+  width: 16px;
+  height: 16px;
 }

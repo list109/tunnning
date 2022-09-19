@@ -1,43 +1,63 @@
-import React from 'react'
-import { Icons } from '../Icons/Icons'
-import './Playlist.css'
+import React from "react";
+import { Icons } from "../Icons/Icons";
+import "./Playlist.css";
 
-export function Playlist({ id, name, length, onRename }) {
+export function Playlist({ id, name, length, onRename, isRenaming }) {
+  const headerRef = React.createRef();
+  const buttonRef = React.createRef();
+
   const onClick = () => {
-    const { current: header } = headerRef
-    const isContentEditable = header.contentEditable === 'true' ? false : true
+    console.log("onClick");
 
-    header.contentEditable = isContentEditable
+    const { current: header } = headerRef;
+
+    if (isRenaming) {
+      header.contentEditable = false;
+      return;
+    }
+
+    const isContentEditable = header.contentEditable === "true" ? false : true;
+
+    header.contentEditable = isContentEditable;
 
     if (isContentEditable) {
-      header.focus()
-      const selection = getSelection()
-      selection.removeAllRanges()
-      selection.collapse(header.firstChild, header.firstChild.length)
+      header.focus();
+      const selection = getSelection();
+      selection.removeAllRanges();
+      selection.collapse(header.firstChild, header.firstChild.length);
     }
-  }
+  };
 
   const handleBlur = ({ currentTarget: header, relatedTarget: rel }) => {
-    const { current: button } = buttonRef
+    console.log("handleBlur");
 
-    if (name === header.textContent) return
+    const { current: button } = buttonRef;
 
-    onRename({ id, name: header.textContent, prevName: name })
+    // the button has been used
+    // (since a blur is fired before a click the contentEditable state doesn't change to leave  processing to the onClick event handler)
+    // or
+    // the key Enter has been used
+    if (button.contains(rel) || header.contentEditable === "false") {
+      if (name === header.textContent) return;
 
-    if (button.contains(rel)) return
+      onRename({ id, name: header.textContent, prevName: name });
 
-    header.contentEditable = false
-  }
+      return;
+    }
+
+    header.contentEditable = false;
+    header.textContent = name;
+  };
 
   const handleKeyPress = ({ currentTarget: header, key }) => {
-    if (key === 'Enter' && header.contentEditable) header.contentEditable = false
-  }
-
-  const headerRef = React.createRef()
-  const buttonRef = React.createRef()
+    if (key === "Enter" && header.contentEditable) {
+      console.log("handleKeyPress Enter");
+      header.contentEditable = false;
+    }
+  };
 
   return (
-    <div className="Playlist">
+    <div className={`Playlist${isRenaming ? " renaming" : ""}`}>
       <div className="Playlist-information">
         <div className="Playlist-title">
           <h3
@@ -54,7 +74,7 @@ export function Playlist({ id, name, length, onRename }) {
             onClick={onClick}
             ref={buttonRef}
           >
-            {Icons.get('edit', 22)}
+            {isRenaming ? Icons.get("loading", 32) : Icons.get("edit", 26)}
           </button>
         </div>
         <p>{length} tracks</p>
@@ -63,5 +83,5 @@ export function Playlist({ id, name, length, onRename }) {
         +
       </button>
     </div>
-  )
+  );
 }

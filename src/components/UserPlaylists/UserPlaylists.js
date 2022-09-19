@@ -1,92 +1,95 @@
-import React from 'react'
-import { Playlist } from '../Playlist/Playlist'
-import { Icons } from '../Icons/Icons'
-import './UserPlaylists.css'
+import React from "react";
+import { Playlist } from "../Playlist/Playlist";
+import { Icons } from "../Icons/Icons";
+import "./UserPlaylists.css";
 
 export class UserPlaylists extends React.Component {
-  containerRef = React.createRef()
+  containerRef = React.createRef();
 
   render() {
-    const { playlists, onLoad } = this.props
-    const notLoaded = typeof playlists[0] === 'string'
-    const message = <p className="UserPlaylists-message">{playlists[0]}</p>
-    const content = notLoaded ? message : this.getPlaylistsTemplate(playlists)
-    const icon = <i className="UserPlaylists-icon">{Icons.get('loading')}</i>
+    const { playlists, onLoad } = this.props;
+    const failedLoading = typeof playlists[0] === "string";
+    const getMessage = (message) => (
+      <p className="UserPlaylists-message">{message}</p>
+    );
+    const content = failedLoading
+      ? getMessage(playlists[0])
+      : this.getPlaylistsTemplate(playlists);
+
+    const icon = <i className="UserPlaylists-icon">{Icons.get("loading")}</i>;
 
     return (
       <div className="UserPlaylists" ref={this.containerRef}>
         <h2>
           User's playlists
           <button className="UserPlaylists-button" onClick={onLoad}>
-            {Icons.get('reload', 26)}
+            {Icons.get("reload", 26)}
           </button>
         </h2>
         {playlists.length ? content : icon}
       </div>
-    )
+    );
   }
 
   getPlaylistsTemplate(playlists) {
-    return playlists.map(({ id, name, tracks }) => (
+    return playlists.map(({ id, name, tracks, isRenaming }) => (
       <Playlist
         key={id}
         id={id}
         name={name}
         length={tracks.total || 0}
         onRename={this.props.onRenamePlaylist}
+        isRenaming={isRenaming}
       />
-    ))
+    ));
   }
 
   changeClasses() {
-    const { current: container } = this.containerRef
-    const { playlists, isToggled } = this.props
+    const { current: container } = this.containerRef;
+    const { playlists, isToggled } = this.props;
 
     if (playlists.length < 1 && isToggled) {
-      setTimeout(() => container.classList.add('loading'))
+      setTimeout(() => container.classList.add("loading"));
     }
 
-    if (playlists.length) container.classList.remove('loading')
+    if (playlists.length) container.classList.remove("loading");
 
-    container.classList[isToggled ? 'add' : 'remove']('toggled')
+    container.classList[isToggled ? "add" : "remove"]("toggled");
   }
 
-  resizeContainer = ({ isToggled: prevIsToggled, playlists: prevPlaylists }) => {
-    const { current: container } = this.containerRef
-    const { isToggled, playlists } = this.props
+  resizeContainer = ({
+    isToggled: prevIsToggled,
+    playlists: prevPlaylists,
+  }) => {
+    const { current: container } = this.containerRef;
+    const { isToggled, playlists } = this.props;
 
-    const notToggled = prevIsToggled === isToggled
-    const notChanged = playlists.length === prevPlaylists.length
+    const noToggle = prevIsToggled === isToggled;
+    const noChange = playlists.length === prevPlaylists.length;
 
-    if (notToggled && notChanged) return
-    if (notToggled && isToggled === false) return
+    if (noToggle && isToggled === false) return;
+    if (noToggle && noChange) return;
 
-    if (isToggled && prevIsToggled && playlists.length > 0 && prevPlaylists.length < 1) {
-      const prevHeight = container.offsetHeight + 'px'
-      container.style.height = 'auto'
-      const autoHeight = container.offsetHeight
-      container.style.height = prevHeight
-      getComputedStyle(container).getPropertyValue('height')
-      container.style.height = Math.max(autoHeight, 400) + 'px'
-      return
-    }
-
-    container.style.height = `${isToggled ? Math.max(container.scrollHeight, 400) : 0}px`
-  }
+    // the min height is required for the container to extend with fix value whilst data is loading
+    // when toggled the height can't go beside two fix values, that is min and max
+    container.style.height = `${
+      isToggled ? Math.min(Math.max(container.scrollHeight, 400), 500) : 0
+    }px`;
+  };
 
   startLoading() {
-    const { isToggled, playlists, onLoad } = this.props
-    if (playlists.length < 1 && isToggled) onLoad()
+    const { isToggled, playlists, onLoad } = this.props;
+    if (playlists.length < 1 && isToggled) onLoad();
   }
 
   componentDidMount() {
-    const { current: container } = this.containerRef
-    container.style.height = '0px'
+    const { current: container } = this.containerRef;
+    container.style.height = "0px";
   }
 
   componentDidUpdate(prevProps) {
-    this.startLoading()
-    this.changeClasses()
-    this.resizeContainer(prevProps)
+    this.startLoading();
+    this.changeClasses();
+    this.resizeContainer(prevProps);
   }
 }
