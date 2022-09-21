@@ -2,7 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import { App } from "./components/App/App.js";
+
 // import reportWebVitals from './reportWebVitals'
+
+// if (process.env.NODE_ENV === 'development') {
+// const { worker, mockAuthState } = require('./mocks/browser')
+// worker.start()
+// mockAuthState()
+// }
+
+import { worker } from "./mocks/browser";
+worker.start();
 
 ReactDOM.render(
   <React.StrictMode>
