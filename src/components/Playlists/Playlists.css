@@ -8,13 +8,17 @@
   background-color: rgba(1, 12, 63, 0.7);
   box-shadow: 0 4px 2px 2px #000000;
   max-height: 981px;
-  padding: 1.8rem 1.16rem 0;
+  /* padding: 1.8rem 1.16rem 0; */
+  padding: 2.2rem 1.16rem 0;
   border-bottom: 2.27rem solid transparent;
   background-color: rgba(1, 12, 63, 0.7);
+
   box-shadow: 0 4px 2px 2px #000000;
 
   overflow-y: auto;
   transition: height 1s ease-out;
+
+  background-color: rgba(74, 61, 92, 0.596);
 }
 
 .Playlists > * {
@@ -27,7 +31,7 @@
 
 .Playlists-button {
   position: absolute;
-  right: 0;
+  right: 13px;
   top: 0;
   box-sizing: content-box;
   width: 20px;

@@ -1,9 +1,12 @@
 .SearchResults {
+  position: relative;
   width: 50%;
   height: 950px;
   overflow-y: scroll;
   padding: 0.88rem;
   background-color: rgba(1, 12, 63, 0.7);
+  background-color: rgba(200, 200, 255, 0.5);
+  background-color: rgba(74, 61, 92, 0.596);
   box-shadow: 0 4px 2px 2px #000000;
 }
 
@@ -13,6 +16,24 @@
 
 .SearchResults-header {
   margin-bottom: 0.5em;
+}
+
+.SearchResults-icon {
+  position: absolute;
+  /* top: calc(50% - 20px); */
+  left: calc(50% - 20px);
+  top: 150px;
+  width: 40px;
+  height: 40px;
+  fill: #fff;
+  opacity: 0;
+  transition: opacity 0.6s ease-in;
+  animation: Loading 2s linear infinite;
+}
+
+.SearchResults.loading .SearchResults-icon {
+  opacity: 1;
+  transition-duration: 1s;
 }
 
 ::-webkit-scrollbar {

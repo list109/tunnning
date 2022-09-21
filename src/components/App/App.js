@@ -13,6 +13,7 @@ export class App extends React.Component {
   state = {
     searchTerm: "",
     searchResults: [],
+    isSearching: false,
 
     playlistName: this.playlistName,
     playlistTracks: [],
@@ -33,13 +34,16 @@ export class App extends React.Component {
   };
 
   search = () => {
+    this.setState({ isSearching: true });
+
     Spotify.searchTrack(this.state.searchTerm)
       .then((tracks) => {
         this.setState({
           searchResults: [...tracks],
         });
       })
-      .catch((err) => console.log("Spotify error", err.message));
+      .catch((err) => console.log("Spotify error", err.message))
+      .finally(() => this.setState({ isSearching: false }));
   };
 
   addTrack = (track) => {
@@ -63,7 +67,9 @@ export class App extends React.Component {
   updatePlaylistName = (value) => this.setState({ playlistName: value });
 
   savePlaylist = () => {
-    const trackURIs = this.state.playlistTracks.map(({ uri }) => uri);
+    const trackURIs = this.state.playlistTracks.map(
+      ({ preview_url }) => preview_url
+    );
     const { playlistName: name } = this.state;
 
     const isVerified = name && trackURIs.length > 0;
@@ -105,7 +111,7 @@ export class App extends React.Component {
       .then((playlists) => {
         this.setState({
           userPlaylists: playlists.length
-            ? playlists
+            ? [...playlists]
             : ["You hasn't created any playlist on your account yet"],
         });
       })
@@ -260,6 +266,7 @@ export class App extends React.Component {
       userPlaylists,
       isSaving,
       isLoading,
+      isSearching,
     } = this.state;
     const playingTrackID = paused ? "" : playingTrack.id;
 
@@ -286,6 +293,7 @@ export class App extends React.Component {
                 onAdd={this.addTrack}
                 onPlayButton={this.trackPlayButton}
                 playingTrackID={playingTrackID}
+                isSearching={isSearching}
               />
               <Playlists
                 playlistName={playlistName}

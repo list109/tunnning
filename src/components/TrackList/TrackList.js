@@ -15,7 +15,9 @@ const getMessage = ({ snapshot, tracksLength }) => {
 
   if (tracksLength < 1)
     return (
-      <div className="TrackList-message">Drag'n'drop or add some tracks</div>
+      <div className="TrackList-message">
+        <p>Drag'n'drop or add some tracks</p>
+      </div>
     );
 };
 

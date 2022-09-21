@@ -60,14 +60,6 @@ export function Playlist({ id, name, length, onRename, isRenaming }) {
     <div className={`Playlist${isRenaming ? " renaming" : ""}`}>
       <div className="Playlist-information">
         <div className="Playlist-title">
-          <h3
-            contentEditable={false}
-            onBlur={handleBlur}
-            onKeyPress={handleKeyPress}
-            ref={headerRef}
-          >
-            {name}
-          </h3>
           <button
             type="button"
             className="Playlist-button Playlist-edit"
@@ -76,12 +68,20 @@ export function Playlist({ id, name, length, onRename, isRenaming }) {
           >
             {isRenaming ? Icons.get("loading", 32) : Icons.get("edit", 26)}
           </button>
+          <h3
+            contentEditable={false}
+            onBlur={handleBlur}
+            onKeyPress={handleKeyPress}
+            ref={headerRef}
+          >
+            {name}
+          </h3>
         </div>
         <p>{length} tracks</p>
       </div>
-      <button type="buttom" className="Playlist-button Playlist-replace">
+      {/* <button type="buttom" className="Playlist-button Playlist-replace">
         +
-      </button>
+      </button> */}
     </div>
   );
 }
