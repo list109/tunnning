@@ -271,7 +271,7 @@ export class App extends React.Component {
       >
         <div>
           <h1>
-            Ja<span className="highlight">mmm</span>ing
+            Tu<span className="highlight">nnn</span>ing
           </h1>
           <div className="App">
             <SearchBar
