@@ -2,7 +2,7 @@
   "name": "jammming",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "https://list109.github.io/tunnning/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
@@ -17,6 +17,7 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
+    "deploy": "npm run build && gh-pages -d build",
     "start": "cross-env BROWSER=none react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
