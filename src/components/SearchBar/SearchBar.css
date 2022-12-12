@@ -11,7 +11,6 @@
   padding: 0.88rem 0;
   border: 1px solid #fff;
   border-radius: 3px;
-  margin-bottom: 2.22rem;
   color: #010c3f;
   text-align: center;
   font-size: 1rem;
@@ -19,6 +18,51 @@
 
 .SearchBar input:focus {
   outline: none;
+}
+
+.SearchBox {
+  position: relative;
+  margin-bottom: 2.22rem;
+  overflow: hidden;
+  cursor: text;
+}
+
+.SearchBox.invalid::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(100% + 20px);
+  height: calc(100% + 20px);
+  transform: translate(-50%, -50%);
+  border: 5px solid rgb(206, 91, 91);
+  border-radius: 3px;
+  animation-duration: 0.9s;
+  animation-name: validation;
+  animation-timing-function: ease-in;
+}
+
+@keyframes validation {
+  40% {
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+  }
+  60% {
+    width: calc(100%);
+    height: calc(100%);
+    border-color: rgba(207, 91, 91, 0.7);
+  }
+  80% {
+    width: calc(100% - 5px);
+    height: calc(100% - 5px);
+  }
+  to {
+    width: calc(100% + 20px);
+    height: calc(100% + 20px);
+    border-color: rgba(207, 91, 91, 0);
+  }
 }
 
 .SearchButton {
@@ -34,6 +78,7 @@
   border: 0px;
   color: #fff;
   font-weight: 500;
+  position: relative;
 }
 
 .SearchButton:hover {

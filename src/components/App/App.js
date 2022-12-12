@@ -15,6 +15,10 @@ export class App extends React.Component {
     searchResults: [],
     isSearching: false,
 
+    validation: {
+      search: true,
+    },
+
     playlistName: this.playlistName,
     playlistTracks: [],
     isSaving: false,
@@ -34,7 +38,17 @@ export class App extends React.Component {
   };
 
   search = () => {
-    this.setState({ isSearching: true });
+    const { searchTerm, isSearching } = this.state;
+
+    if (isSearching) return;
+
+    if (searchTerm.length < 1) {
+      this.setState({ validation: { search: false } });
+      setTimeout(() => this.setState({ validation: { search: true } }), 900);
+      return;
+    }
+
+    this.setState({ isSearching: true, validation: { search: true } });
 
     Spotify.searchTrack(this.state.searchTerm)
       .then((tracks) => {
@@ -267,6 +281,7 @@ export class App extends React.Component {
       isSaving,
       isLoading,
       isSearching,
+      validation,
     } = this.state;
     const playingTrackID = paused ? "" : playingTrack.id;
 
@@ -287,6 +302,7 @@ export class App extends React.Component {
               onChange={this.handleTermChange}
               onKeyDown={this.getEnterDownHandler(this.search)}
               isSearching={isSearching}
+              validation={validation}
             />
             <div className="App-bars">
               <SearchResults

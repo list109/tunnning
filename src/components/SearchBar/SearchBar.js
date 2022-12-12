@@ -7,18 +7,21 @@ export function SearchBar({
   onSearch,
   onKeyDown,
   isSearching,
+  validation,
 }) {
   const handleChange = ({ target }) => onChange(target.value);
   const handleKeyDown = ({ code }) => onKeyDown(code);
 
   return (
     <div className="SearchBar">
-      <input
-        value={searchTerm}
-        placeholder="Enter A Song, Album, or Artist"
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-      />
+      <div className={`SearchBox ${validation.search ? "" : " invalid"}`}>
+        <input
+          value={searchTerm}
+          placeholder="Enter A Song, Album, or Artist"
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+        />
+      </div>
       <button
         className={`SearchButton${isSearching ? " searching" : ""}`}
         onClick={onSearch}
