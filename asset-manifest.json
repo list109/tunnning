@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/tunnning/static/css/main.870f4569.chunk.css",
-    "main.js": "/tunnning/static/js/main.d93019f2.chunk.js",
-    "main.js.map": "/tunnning/static/js/main.d93019f2.chunk.js.map",
+    "main.css": "/tunnning/static/css/main.e431b2aa.chunk.css",
+    "main.js": "/tunnning/static/js/main.806db6ce.chunk.js",
+    "main.js.map": "/tunnning/static/js/main.806db6ce.chunk.js.map",
     "runtime-main.js": "/tunnning/static/js/runtime-main.f99a3aa5.js",
     "runtime-main.js.map": "/tunnning/static/js/runtime-main.f99a3aa5.js.map",
-    "static/js/2.26e5133a.chunk.js": "/tunnning/static/js/2.26e5133a.chunk.js",
-    "static/js/2.26e5133a.chunk.js.map": "/tunnning/static/js/2.26e5133a.chunk.js.map",
+    "static/js/2.d7992ad6.chunk.js": "/tunnning/static/js/2.d7992ad6.chunk.js",
+    "static/js/2.d7992ad6.chunk.js.map": "/tunnning/static/js/2.d7992ad6.chunk.js.map",
     "index.html": "/tunnning/index.html",
-    "static/css/main.870f4569.chunk.css.map": "/tunnning/static/css/main.870f4569.chunk.css.map",
-    "static/js/2.26e5133a.chunk.js.LICENSE.txt": "/tunnning/static/js/2.26e5133a.chunk.js.LICENSE.txt",
+    "static/css/main.e431b2aa.chunk.css.map": "/tunnning/static/css/main.e431b2aa.chunk.css.map",
+    "static/js/2.d7992ad6.chunk.js.LICENSE.txt": "/tunnning/static/js/2.d7992ad6.chunk.js.LICENSE.txt",
     "static/media/App.css": "/tunnning/static/media/background_alt.65df2e1c.webp"
   },
   "entrypoints": [
     "static/js/runtime-main.f99a3aa5.js",
-    "static/js/2.26e5133a.chunk.js",
-    "static/css/main.870f4569.chunk.css",
-    "static/js/main.d93019f2.chunk.js"
+    "static/js/2.d7992ad6.chunk.js",
+    "static/css/main.e431b2aa.chunk.css",
+    "static/js/main.806db6ce.chunk.js"
   ]
 }
