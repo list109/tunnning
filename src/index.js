@@ -11,15 +11,29 @@ import { App } from "./components/App/App.js";
 // mockAuthState()
 // }
 
-import { worker } from "./mocks/browser";
-worker.start();
+async function main() {
+  if (window.location.pathname === "/tunnning") {
+    window.location.pathname = "/tunnning/";
+    return;
+  }
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App></App>
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+  const { worker } = require("./mocks/browser");
+
+  await worker.start({
+    serviceWorker: {
+      url: "/tunnning/mockServiceWorker.js",
+    },
+  });
+
+  ReactDOM.render(
+    <React.StrictMode>
+      <App></App>
+    </React.StrictMode>,
+    document.getElementById("root")
+  );
+}
+
+main();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
