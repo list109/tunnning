@@ -39,3 +39,25 @@
 .SearchButton:hover {
   background-color: rgba(98, 68, 189, 0.7);
 }
+
+.SearchButton.searching {
+  cursor: not-allowed;
+  color: rgb(133, 133, 133);
+  text-shadow: 1px 1px black;
+  background-image: linear-gradient(
+    to right,
+    #453085,
+    #4d3692,
+    #6848c7,
+    #6848c7,
+    #4d3692,
+    #453085
+  );
+  background-size: 300% 100%;
+  animation: CurrentPlaylist-save 4s infinite linear;
+}
+@keyframes CurrentPlaylist-save {
+  100% {
+    background-position: 500% 500%;
+  }
+}
