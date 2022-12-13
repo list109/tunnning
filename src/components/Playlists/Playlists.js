@@ -6,6 +6,7 @@ import "./Playlists.css";
 
 export class Playlists extends React.Component {
   state = { isToggled: false };
+  playlistsBtnRef = React.createRef();
 
   togglePlaylists = () => this.setState({ isToggled: !this.state.isToggled });
 
@@ -39,6 +40,7 @@ export class Playlists extends React.Component {
           type="button"
           className="Playlists-button"
           onClick={this.togglePlaylists}
+          ref={this.playlistsBtnRef}
         >
           {Icons.get("playlists", 20)}
         </button>
@@ -66,5 +68,15 @@ export class Playlists extends React.Component {
         </div>
       </div>
     );
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.isSaving === true &&
+      this.props.isSaving === false &&
+      this.state.isToggled === false
+    ) {
+      this.playlistsBtnRef.current.click();
+    }
   }
 }
